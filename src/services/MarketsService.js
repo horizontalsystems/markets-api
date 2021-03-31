@@ -29,8 +29,9 @@ class MarketsService {
     return {}
   }
 
-  getGlobalMarkets(toTimestamp) {
-    return Storage.getGlobalMarkets(toTimestamp)
+  get24hGlobalMarkets() {
+    const i24h = (Math.floor(Date.now() / 1000)) - 86400
+    return Storage.getGlobalMarkets(i24h)
   }
 }
 

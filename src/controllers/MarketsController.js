@@ -5,7 +5,7 @@ class MarketsController {
     this.marketService = new MarketsService()
   }
 
-  getLatestGlobalMarkets(res) {
+  getLatestGlobalMarkets(_, res) {
     this.marketService.getLatestGlobalMarkets()
       .then(result => {
         res.status(200).json(result)
@@ -15,8 +15,8 @@ class MarketsController {
       })
   }
 
-  getGlobalMarkets(req, res) {
-    this.marketService.getGlobalMarkets(req.query.toTimestamp)
+  get24hGlobalMarkets(_, res) {
+    this.marketService.get24hGlobalMarkets()
       .then(result => {
         res.status(200).json(result)
       })
