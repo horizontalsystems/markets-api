@@ -1,7 +1,7 @@
 import cron from 'node-cron'
 import Storage from '../db/Storage'
 
-const EVERY_20M = '0 */3 * * * *' // every 20 min
+const EVERY_20M = '0 */20 * * * *' // every 20 min
 
 class MarketsSyncer {
   constructor(marketInfoProvider) {
