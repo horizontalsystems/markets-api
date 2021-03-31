@@ -15,12 +15,12 @@ export default {
     })
   },
 
-  getGlobalMarkets(toTimestamp) {
+  getGlobalMarkets(fromTimestamp) {
     return GlobalMarkets.findAll({
       order: [['timestamp', 'DESC']],
       where: {
         timestamp: {
-          [Op.gte]: toTimestamp
+          [Op.gte]: fromTimestamp
         }
       },
       attributes: ['timestamp', 'marketCap', 'marketCapDefi', 'dominanceBTC', 'volume24h', 'totalValueLocked']
