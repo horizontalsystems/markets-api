@@ -5,12 +5,15 @@ class MarketInfoProvider {
   }
 
   async getGlobalMarkets() {
-    const globalData = await this.coingeckoProvider.getGlobalDefiMarkets()
+    const globalData = await this.coingeckoProvider.getGlobalMarkets()
 
     if (globalData) {
+      const globalDefiData = await this.coingeckoProvider.getGlobalDefiMarkets()
       const defiLlamaData = await this.defiLlamaProvider.getGlobalDefiMarkets()
+
+      globalData.marketCapDefi = globalDefiData.marketCapDefi
       globalData.totalValueLocked = defiLlamaData.totalValueLocked
-      globalData.volume24h = defiLlamaData.volume24h
+
       return globalData
     }
 

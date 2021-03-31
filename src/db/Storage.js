@@ -6,25 +6,25 @@ export default {
     const now = Math.floor(Date.now() / 1000)
 
     GlobalMarkets.create({
-      date: now,
+      timestamp: now,
       marketCap: data.marketCap,
+      marketCapDefi: data.marketCapDefi,
+      dominanceBTC: data.dominanceBTC,
       volume24h: data.volume24h,
       totalValueLocked: data.totalValueLocked
     })
   },
 
-  getLatestMarkets() {
-    const now = Math.floor(Date.now() / 1000)
-
+  getGlobalMarkets(toTimestamp) {
     return GlobalMarkets.findAll({
-      limit: 1,
-      order: [['date', 'DESC']],
+      order: [['timestamp', 'DESC']],
       where: {
-        date: {
-          [Op.lte]: now
+        timestamp: {
+          [Op.gte]: toTimestamp
         }
       },
-      attributes: ['date', 'marketCap', 'volume24h', 'totalValueLocked']
+      attributes: ['timestamp', 'marketCap', 'marketCapDefi', 'dominanceBTC', 'volume24h', 'totalValueLocked']
     })
   }
+
 }
