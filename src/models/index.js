@@ -1,6 +1,9 @@
 import Sequelize from 'sequelize'
 import configJson from '../db/config.json'
 import GlobalMarkets from './GlobalMarkets'
+import CoinInfo from './CoinInfo'
+import DefiMarkets from './DefiMarkets'
+import ResourceInfo from './ResourceInfo'
 
 const config = configJson[process.env.NODE_ENV || 'development']
 const sequelize = new Sequelize(
@@ -11,7 +14,11 @@ const sequelize = new Sequelize(
 )
 
 const models = {
-  GlobalMarkets: GlobalMarkets.init(sequelize, Sequelize)
+  GlobalMarkets: GlobalMarkets.init(sequelize, Sequelize),
+  DefiMarkets: DefiMarkets.init(sequelize, Sequelize),
+  ResourceInfo: ResourceInfo.init(sequelize, Sequelize),
+  CoinInfo: CoinInfo.init(sequelize, Sequelize)
+
 }
 
 // This creates relationships in the ORM
