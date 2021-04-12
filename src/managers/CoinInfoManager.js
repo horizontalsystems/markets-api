@@ -5,8 +5,6 @@ import coinsInfo from './coins.info.json'
 
 class CoinInfoManager {
   static async init() {
-    await new Promise(r => setTimeout(r, 5000));
-
     let updateData = false
     const { version } = coinsInfo
 

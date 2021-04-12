@@ -16,7 +16,8 @@ const marketsSyncer = new MarketsSyncer(marketInfoProvider)
 server.listen(process.env.PORT, () => {
   console.log(`Server started at port ${process.env.PORT}`)
 
-  models.sequelize.sync({ force: false })
-  CoinInfoManager.init()
-  marketsSyncer.start()
+  models.sequelize.sync({ force: false }).then(() => {
+    CoinInfoManager.init()
+    marketsSyncer.start()
+  })
 })
