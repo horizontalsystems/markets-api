@@ -16,10 +16,30 @@ class MarketsSyncer {
     }
   }
 
-  syncMarkets() {
-    this.marketInfoProvider.getGlobalMarkets().then(data => {
-      Storage.saveGlobalMarkets(data)
-    })
+  async syncMarkets() {
+    this.syncGlobalMarkets()
+    await new Promise(r => setTimeout(r, 1000));
+    this.syncDefiMarkets()
+  }
+
+  syncGlobalMarkets() {
+    try {
+      this.marketInfoProvider.getGlobalMarkets().then(data => {
+        Storage.saveGlobalMarkets(data)
+      })
+    } catch (e) {
+      console.error(e.stack)
+    }
+  }
+
+  async syncDefiMarkets() {
+    try {
+      this.marketInfoProvider.getDefiMarkets().then(data => {
+        Storage.saveCoinInfoDetails(data)
+      })
+    } catch (e) {
+      console.error(e.stack)
+    }
   }
 }
 

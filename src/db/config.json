@@ -11,7 +11,7 @@
       "min": 2,
       "max": 5
     },
-    "logging": true,
+    "logging": false,
     "define": {
       "timestamps": false
     }
