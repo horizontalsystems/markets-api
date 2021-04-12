@@ -33,6 +33,28 @@ class MarketsService {
     const i24h = (Math.floor(Date.now() / 1000)) - 86400
     return Storage.getGlobalMarkets(i24h)
   }
+
+  async getDefiMarkets() {
+    try {
+      const i24h = (Math.floor(Date.now() / 1000)) - 86400
+      const defiMarkets = await Storage.getDefiMarkets(i24h)
+
+      if (defiMarkets) {
+        if (defiMarkets.length > 0) {
+          defiMarkets.map(coinData => {
+            delete coinData.coin_id
+            return coinData
+          })
+
+          return defiMarkets
+        }
+      }
+    } catch (e) {
+      console.error(e)
+    }
+
+    return {}
+  }
 }
 
 export default MarketsService

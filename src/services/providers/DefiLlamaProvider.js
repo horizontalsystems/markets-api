@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class DefiLlamaProvider {
   constructor() {
-    this.baseUrl = 'https://api.defillama.com'
+    this.baseUrl = 'https://api.llama.fi'
   }
 
   async getGlobalDefiMarkets() {
@@ -15,7 +15,7 @@ class DefiLlamaProvider {
   }
 
   getDefiMarkets() {
-    return this.doGetRequest(`${this.baseUrl}/protocols`)
+    return axios.get(`${this.baseUrl}/protocols`)
   }
 }
 
