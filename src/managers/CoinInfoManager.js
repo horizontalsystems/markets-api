@@ -4,7 +4,7 @@ import ResourceType from '../models/ResourceType'
 import coinsInfo from './coins.info.json'
 
 class CoinInfoManager {
-  static async init() {
+  async init() {
     let updateData = false
     const { version } = coinsInfo
 
