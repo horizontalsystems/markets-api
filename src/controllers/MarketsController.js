@@ -15,8 +15,8 @@ class MarketsController {
       })
   }
 
-  get24hGlobalMarkets(_, res) {
-    this.marketService.get24hGlobalMarkets()
+  get24hGlobalMarkets(req, res) {
+    this.marketService.getGlobalMarkets(req.param.period)
       .then(result => {
         res.status(200).json(result)
       })
