@@ -2,6 +2,7 @@
 import Storage from '../db/Storage'
 import ResourceType from '../models/ResourceType'
 import coinsInfo from './coins.info.json'
+import logger from '../logger'
 
 class CoinInfoManager {
   async init() {
@@ -40,7 +41,7 @@ class CoinInfoManager {
         Storage.saveResourceInfo({ name: ResourceType.COININFO, version })
       }
     } catch (e) {
-      console.log(e)
+      logger.log(e)
     }
   }
 }

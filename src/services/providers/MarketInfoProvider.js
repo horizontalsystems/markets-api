@@ -1,3 +1,5 @@
+import logger from '../../logger'
+
 class MarketInfoProvider {
   constructor(coingeckoProvider, defiLlamaProvider) {
     this.coingeckoProvider = coingeckoProvider
@@ -43,7 +45,7 @@ class MarketInfoProvider {
         return defiMarkets
       }
     } catch (e) {
-      console.log(`Error fetching defimarkets!${e}`)
+      logger.log(`Error fetching defimarkets!${e}`)
     }
 
     return {}
