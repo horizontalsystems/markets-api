@@ -7,6 +7,7 @@ import MarketInfoProvider from '../src/services/providers/MarketInfoProvider'
 import CoingeckoProvider from '../src/services/providers/CoingeckoProvider'
 import DefiLlamaProvider from '../src/services/providers/DefiLlamaProvider'
 import CoinInfoManager from '../src/managers/CoinInfoManager'
+import logger from '../src/logger'
 
 const coingeckoProvider = new CoingeckoProvider()
 const defiLlamaProvider = new DefiLlamaProvider()
@@ -15,7 +16,7 @@ const marketsSyncer = new MarketsSyncer(marketInfoProvider)
 const coinInfoManager = new CoinInfoManager()
 
 server.listen(process.env.PORT, () => {
-  console.log(`Server started at port ${process.env.PORT}`)
+  logger.info(`Server started at port ${process.env.PORT}`)
 
   models.sequelize.sync({ force: false }).then(() => {
     coinInfoManager.init()

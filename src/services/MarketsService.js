@@ -1,4 +1,5 @@
 import Storage from '../db/Storage'
+import logger from '../logger'
 
 class MarketsService {
   async getLatestGlobalMarkets() {
@@ -23,7 +24,7 @@ class MarketsService {
         }
       }
     } catch (e) {
-      console.error(e)
+      logger.error(e)
     }
 
     return {}
@@ -50,7 +51,7 @@ class MarketsService {
         }
       }
     } catch (e) {
-      console.error(e)
+      logger.error(e)
     }
 
     return {}
