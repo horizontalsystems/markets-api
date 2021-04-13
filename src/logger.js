@@ -1,9 +1,5 @@
-/* eslint-disable no-unused-vars */
-
-const appRoot = require('app-root-path');
-const winston = require('winston');
-
-const { format, createLogger, transports } = require('winston');
+import appRoot from 'app-root-path'
+import winston from 'winston'
 
 const options = {
   file: {
@@ -21,27 +17,27 @@ const options = {
     json: false,
     colorize: true
   }
-};
+}
 
-const logger = createLogger({
-  format: format.combine(
-    format.timestamp({
+const logger = winston.createLogger({
+  format: winston.format.combine(
+    winston.format.timestamp({
       format: 'YYYY-MM-DD HH:mm:ss'
     }),
-    format.simple(),
-    format.printf(info => `-- ${info.timestamp} ${info.level}: ${info.message}`)
+    winston.format.simple(),
+    winston.format.printf(info => `-- ${info.timestamp} ${info.level}: ${info.message}`)
   ),
   transports: [
     // new winston.transports.File(options.file),
     new winston.transports.Console(options.console)
   ],
   exitOnError: false // do not exit on handled exceptions
-});
+})
 
 logger.stream = {
-  write(message, encoding) {
+  write(message) {
     logger.info(message);
   }
-};
+}
 
-module.exports = logger;
+export default logger
