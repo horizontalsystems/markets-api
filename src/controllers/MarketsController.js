@@ -5,8 +5,8 @@ class MarketsController {
     this.marketService = new MarketsService()
   }
 
-  getLatestGlobalMarkets(_, res) {
-    this.marketService.getLatestGlobalMarkets()
+  getLatestGlobalMarkets(req, res) {
+    this.marketService.getLatestGlobalMarkets(req.query.currency_code)
       .then(result => {
         res.status(200).json(result)
       })
@@ -16,7 +16,7 @@ class MarketsController {
   }
 
   get24hGlobalMarkets(req, res) {
-    this.marketService.getGlobalMarkets(req.param.period)
+    this.marketService.getGlobalMarkets(req.query.currency_code, req.param.period)
       .then(result => {
         res.status(200).json(result)
       })
@@ -25,8 +25,8 @@ class MarketsController {
       })
   }
 
-  getDefiMarkets(_, res) {
-    this.marketService.getDefiMarkets()
+  getDefiMarkets(req, res) {
+    this.marketService.getDefiMarkets(req.query.currency_code)
       .then(result => {
         res.status(200).json(result)
       })

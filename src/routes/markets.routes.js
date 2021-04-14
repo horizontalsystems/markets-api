@@ -4,8 +4,8 @@ import MarketsController from '../controllers/MarketsController'
 const controller = new MarketsController()
 const router = express.Router()
 
-router.get('/global/latest', (_, res) => controller.getLatestGlobalMarkets(_, res))
+router.get('/global/latest', (req, res) => controller.getLatestGlobalMarkets(req, res))
 router.get('/global/:period', (req, res) => controller.get24hGlobalMarkets(req, res))
-router.get('/defi', (_, res) => controller.getDefiMarkets(_, res))
+router.get('/defi', (req, res) => controller.getDefiMarkets(req, res))
 
 export default router
