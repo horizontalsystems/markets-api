@@ -14,6 +14,13 @@ class CoingeckoProvider {
     }
   }
 
+  async getXRates(coins, fiats) {
+    const params = `ids=${coins}&vs_currencies=${fiats}&include_market_cap=false`
+    const { data: resp } = await axios.get(`${this.baseUrl}/simple/price?${params}`)
+
+    return resp
+  }
+
   async getGlobalMarkets() {
     const { data: resp } = await axios.get(`${this.baseUrl}/global`)
 

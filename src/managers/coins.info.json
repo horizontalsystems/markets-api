@@ -1,5 +1,21 @@
 {
     "version": 2,
+    "supported_currencies":[
+        {"code": "USD", "name": "US Dollar"},
+        {"code": "EUR", "name": "Euro"},
+        {"code": "GBP", "name": "Australian Dollar"},
+        {"code": "JPY", "name": "Japan Yen"},
+        {"code": "AUD", "name": "Australian Dollar"},
+        {"code": "CAD", "name": "Canadian Dollar"},
+        {"code": "SGD", "name": "Singapore Dollar"},
+        {"code": "BRL", "name": "Brazilian Real"},
+        {"code": "CHF", "name": "Swiss Franc"},
+        {"code": "CNY", "name": "Chinese Yuan"},
+        {"code": "HKD", "name": "Hong Kong Dollar"},
+        {"code": "ILS", "name": "Israeli New Sheke"},
+        {"code": "RUB", "name": "Russian Ruble"},
+        {"code": "TRY", "name": "Turkish Lira"}
+   ],
     "coins": [
         {
             "id": "1",
