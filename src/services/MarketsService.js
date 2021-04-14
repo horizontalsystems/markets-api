@@ -73,10 +73,10 @@ class MarketsService {
 
         results.forEach(result => {
           if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
-            const xrateResult = usdXRates.filter(rate => rate.timestamp === result.timestamp)
+            const xrateResult = usdXRates.find(rate => rate.timestamp === result.timestamp)
 
-            if (Object.keys(xrateResult).length > 0) {
-              usdXRates = xrateResult[0].rate
+            if (xrateResult) {
+              usdXRates = xrateResult.rate
             }
           }
 

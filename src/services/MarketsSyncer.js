@@ -2,7 +2,7 @@ import cron from 'node-cron'
 import Storage from '../db/Storage'
 import logger from '../logger'
 
-const EVERY_20M = '0 */2 * * * *' // every 20 min
+const EVERY_20M = '0 */20 * * * *' // every 20 min
 
 class MarketsSyncer {
   constructor(marketInfoProvider, currencies) {

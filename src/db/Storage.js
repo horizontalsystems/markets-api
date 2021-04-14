@@ -37,7 +37,6 @@ export default {
     })
   },
 
-
   saveGlobalMarkets(data) {
     GlobalMarkets.create({
       timestamp: data.timestamp,
