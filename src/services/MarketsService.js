@@ -3,7 +3,11 @@ import logger from '../logger'
 import TimePeriod from '../models/TimePeriod'
 
 class MarketsService {
-  async getLatestGlobalMarkets() {
+  constructor() {
+    this.baseCurrencyCode = 'USD'
+  }
+
+  async getLatestGlobalMarkets(currencyCode) {
     try {
       const marketsData = await Storage.getGlobalMarkets((Math.floor(Date.now() / 1000)) - 86400)
 
@@ -11,11 +15,22 @@ class MarketsService {
         const latest = marketsData.shift()
         const data24 = marketsData.pop()
 
+        let usdXRate = 1
+        let resCurrencyCode = currencyCode
+        if (currencyCode) {
+          if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
+            const result = await Storage.getXRate(latest.timestamp, this.baseCurrencyCode, currencyCode.toUpperCase())
+            if (result) usdXRate = result.rate
+            else return {}
+          }
+        } else resCurrencyCode = this.baseCurrencyCode
+
         return {
-          market_cap: latest.marketCap,
-          market_cap_defi: latest.marketCapDefi,
-          volume24h: latest.volume24h,
-          tvl: latest.totalValueLocked,
+          currency_code: resCurrencyCode,
+          market_cap: latest.marketCap * usdXRate,
+          market_cap_defi: latest.marketCapDefi * usdXRate,
+          volume24h: latest.volume24h * usdXRate,
+          tvl: latest.totalValueLocked * usdXRate,
           dominance_btc: latest.dominanceBTC,
           market_cap_diff_24h: ((latest.marketCap - data24.marketCap) * 100) / data24.marketCap,
           market_cap_defi_diff_24h: ((latest.marketCapDefi - data24.marketCapDefi) * 100) / data24.marketCapDefi,
@@ -25,43 +40,100 @@ class MarketsService {
         }
       }
     } catch (e) {
-      logger.error(e)
+      logger.error(`Error getting latest GlobalMarkets ${e}`)
     }
 
     return {}
   }
 
-  async getGlobalMarkets(period) {
-    const rangePeriod = (Math.floor(Date.now() / 1000)) - TimePeriod.identify(period).seconds
-    const results = await Storage.getGlobalMarkets(rangePeriod)
-    return results.map(market => ({
-      timestamp: market.timestamp,
-      market_cap: market.marketCap,
-      market_cap_defi: market.marketCapDefi,
-      volume24h: market.volume24h,
-      tvl: market.totalValueLocked,
-      dominance_btc: market.dominanceBTC
-    }))
+  async getGlobalMarkets(currencyCode, period) {
+    try {
+      const rangePeriod = (Math.floor(Date.now() / 1000)) - TimePeriod.identify(period).seconds
+      const results = await Storage.getGlobalMarkets(rangePeriod)
+
+      if (results) {
+        const globalMarkets = []
+        let usdXRates = []
+        const usdXRate = 1
+        let resCurrencyCode = currencyCode
+
+        if (currencyCode) {
+          if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
+            usdXRates = await Storage.getXRates(
+              results.map(r => r.timestamp),
+              this.baseCurrencyCode,
+              currencyCode.toUpperCase()
+            )
+
+            if (Object.keys(usdXRates).length === 0 || Object.keys(usdXRates).length !== results.length) {
+              return {}
+            }
+          }
+        } else resCurrencyCode = this.baseCurrencyCode
+
+        results.forEach(result => {
+          if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
+            const xrateResult = usdXRates.filter(rate => rate.timestamp === result.timestamp)
+
+            if (Object.keys(xrateResult).length > 0) {
+              usdXRates = xrateResult[0].rate
+            }
+          }
+
+          const globalMarket = {
+            currency_code: resCurrencyCode,
+            timestamp: result.timestamp,
+            market_cap: result.marketCap * usdXRate,
+            market_cap_defi: result.marketCapDefi * usdXRate,
+            volume24h: result.volume24h * usdXRate,
+            tvl: result.totalValueLocked * usdXRate,
+            dominance_btc: result.dominanceBTC
+          }
+
+          globalMarkets.push(globalMarket)
+        })
+
+        return globalMarkets
+      }
+    } catch (e) {
+      logger.error(`Error getting GlobalMarkets for period:${period} , ${e}`)
+    }
+
+    return {}
   }
 
-  async getDefiMarkets() {
+  async getDefiMarkets(currencyCode) {
     try {
       const i24h = (Math.floor(Date.now() / 1000)) - 86400
-      const defiMarkets = await Storage.getDefiMarkets(i24h)
+      const results = await Storage.getDefiMarkets(i24h)
 
-      if (defiMarkets) {
-        if (defiMarkets.length > 0) {
-          return defiMarkets.map(coinData => ({
-            coingecko_id: coinData.coingecko_id,
-            name: coinData.name,
-            code: coinData.code,
-            tvl: coinData.totalvaluelocked,
-            tvl_diff_24h: coinData.totalvaluelockeddiff24h
-          }))
+      if (results) {
+        if (results.length > 0) {
+          const { timestamp } = results[0]
+          let usdXRate = 1
+          let resCurrencyCode = currencyCode
+          if (currencyCode) {
+            if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
+              const result = await Storage.getXRate(timestamp, this.baseCurrencyCode, currencyCode.toUpperCase())
+              if (result) usdXRate = result.rate
+              else return {}
+            }
+          } else resCurrencyCode = this.baseCurrencyCode
+
+          if (results.length > 0) {
+            return results.map(result => ({
+              currency_code: resCurrencyCode,
+              coingecko_id: result.coingecko_id,
+              name: result.name,
+              code: result.code,
+              tvl: result.totalvaluelocked * usdXRate,
+              tvl_diff_24h: result.totalvaluelockeddiff24h
+            }))
+          }
         }
       }
     } catch (e) {
-      logger.error(e)
+      logger.error(`Error getting DefiMarkets :${e}`)
     }
 
     return {}

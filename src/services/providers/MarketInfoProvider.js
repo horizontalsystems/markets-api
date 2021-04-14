@@ -6,13 +6,14 @@ class MarketInfoProvider {
     this.defiLlamaProvider = defiLlamaProvider
   }
 
-  async getGlobalMarkets() {
+  async getGlobalMarkets(timestamp) {
     const globalData = await this.coingeckoProvider.getGlobalMarkets()
 
     if (globalData) {
       const globalDefiData = await this.coingeckoProvider.getGlobalDefiMarkets()
       const defiLlamaData = await this.defiLlamaProvider.getGlobalDefiMarkets()
 
+      globalData.timestamp = timestamp
       globalData.marketCapDefi = globalDefiData.marketCapDefi
       globalData.totalValueLocked = defiLlamaData.totalValueLocked
 
@@ -22,12 +23,10 @@ class MarketInfoProvider {
     return {}
   }
 
-  async getDefiMarkets() {
+  async getDefiMarkets(timestamp) {
     try {
       const defiLlamaData = await this.defiLlamaProvider.getDefiMarkets()
       if (defiLlamaData) {
-        const now = Math.floor(Date.now() / 1000)
-
         const defiMarkets = defiLlamaData.data.map(data => ({
           id: data.id,
           name: data.name,
@@ -37,7 +36,7 @@ class MarketInfoProvider {
           coinGeckoId: data.gecko_id,
 
           defiMarkets: {
-            timestamp: now,
+            timestamp,
             totalValueLocked: data.tvl
           }
         }))
@@ -46,6 +45,47 @@ class MarketInfoProvider {
       }
     } catch (e) {
       logger.log(`Error fetching defimarkets!${e}`)
+    }
+
+    return {}
+  }
+
+  async getCurrencyXRates(baseCurrency, currencyCodeList, timestamp) {
+    try {
+      let currencies
+
+      if (Object.keys(currencyCodeList).length > 0) currencies = currencyCodeList.join(',')
+      else currencies = 'USD'
+
+      const result = await this.coingeckoProvider.getXRates('bitcoin', currencies)
+      if (result) {
+        const xrates = []
+        const coinResult = result.bitcoin
+        let usdXRate = 1
+        currencyCodeList.forEach(currencyCode => {
+          try {
+            if (currencyCode.toUpperCase() === baseCurrency) {
+              usdXRate = parseFloat(coinResult[currencyCode.toLowerCase()])
+            } else {
+              const currencyXRate = parseFloat(coinResult[currencyCode.toLowerCase()])
+              const rate = currencyXRate / usdXRate
+              const xrate = {
+                timestamp,
+                sourceCode: baseCurrency.toUpperCase(),
+                targetCode: currencyCode.toUpperCase(),
+                rate
+              }
+              xrates.push(xrate)
+            }
+          } catch (e) {
+            // ignore
+          }
+        })
+
+        return xrates
+      }
+    } catch (e) {
+      logger.log(`Error fetching xrates!${e}`)
     }
 
     return {}
