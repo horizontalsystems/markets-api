@@ -91,8 +91,8 @@ export default {
     const sql = `SELECT DISTINCT ON (coin_id) tb1.coin_id,
                                 tbc.coingecko_id,tbc.code,tbc.name, tb1.timestamp,
                                 tb1.tvl as totalValueLocked,
-                                case when tb1.tvl <=0 then 0
-                                else ((tb2.tvl-tb1.tvl)* 100)/tb1.tvl end AS totalValueLockedDiff24h
+                                case when tb2.tvl <=0 then 0
+                                else ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl end AS totalValueLockedDiff24h
                  FROM tb_defi_markets AS tb1, tb_defi_markets AS tb2, tb_coin_info AS tbc
                  WHERE tb1.coin_id = tb2.coin_id and tb2.timestamp>=:fromTimestamp and tbc.id = tb1.coin_id
                  ORDER BY tb1.coin_id, tb1.timestamp DESC, tb2.timestamp`

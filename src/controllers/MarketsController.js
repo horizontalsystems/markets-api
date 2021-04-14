@@ -15,8 +15,8 @@ class MarketsController {
       })
   }
 
-  get24hGlobalMarkets(req, res) {
-    this.marketService.getGlobalMarkets(req.query.currency_code, req.param.period)
+  getGlobalMarkets(req, res) {
+    this.marketService.getGlobalMarkets(req.query.currency_code, req.params.period)
       .then(result => {
         res.status(200).json(result)
       })
