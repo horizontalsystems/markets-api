@@ -29,33 +29,21 @@ class MarketsSyncer {
   }
 
   syncGlobalMarkets(now) {
-    try {
-      this.marketInfoProvider.getGlobalMarkets(now).then(data => {
-        Storage.saveGlobalMarkets(data)
-      })
-    } catch (e) {
-      logger.error(e.stack)
-    }
+    this.marketInfoProvider.getGlobalMarkets(now).then(data => {
+      Storage.saveGlobalMarkets(data)
+    }).catch(e => logger.error(e.stack));
   }
 
   async syncDefiMarkets(now) {
-    try {
-      this.marketInfoProvider.getDefiMarkets(now).then(data => {
-        Storage.saveCoinInfoDetails(data)
-      })
-    } catch (e) {
-      logger.error(e.stack)
-    }
+    this.marketInfoProvider.getDefiMarkets(now).then(data => {
+      Storage.saveCoinInfoDetails(data)
+    }).catch(e => logger.error(e.stack));
   }
 
   async syncXRates(now) {
-    try {
-      this.marketInfoProvider.getCurrencyXRates(this.baseCurrencyCode, this.currencyCodes, now).then(data => {
-        Storage.saveXRates(data)
-      })
-    } catch (e) {
-      logger.error(e.stack)
-    }
+    this.marketInfoProvider.getCurrencyXRates(this.baseCurrencyCode, this.currencyCodes, now).then(data => {
+      Storage.saveXRates(data)
+    }).catch(e => logger.error(e.stack));
   }
 }
 
