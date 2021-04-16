@@ -82,7 +82,7 @@ class MarketsService {
 
           const globalMarket = {
             currency_code: resCurrencyCode,
-            timestamp: result.timestamp,
+            timestamp: parseInt(result.timestamp, 10),
             market_cap: result.marketCap * usdXRate,
             market_cap_defi: result.marketCapDefi * usdXRate,
             volume24h: result.volume24h * usdXRate,
@@ -126,8 +126,8 @@ class MarketsService {
               coingecko_id: result.coingecko_id,
               name: result.name,
               code: result.code,
-              tvl: result.totalvaluelocked * usdXRate,
-              tvl_diff_24h: result.totalvaluelockeddiff24h
+              tvl: result.tvl * usdXRate,
+              tvl_diff_24h: result.tvl_diff
             }))
           }
         }
