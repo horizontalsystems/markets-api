@@ -5,6 +5,7 @@ import CoinInfo from './CoinInfo'
 import DefiMarkets from './DefiMarkets'
 import ResourceInfo from './ResourceInfo'
 import FiatXRate from './XRate'
+import CryptoNews from './CryptoNews'
 
 const config = configJson[process.env.NODE_ENV || 'development']
 const sequelize = new Sequelize(
@@ -19,7 +20,8 @@ const models = {
   DefiMarkets: DefiMarkets.init(sequelize, Sequelize),
   ResourceInfo: ResourceInfo.init(sequelize, Sequelize),
   CoinInfo: CoinInfo.init(sequelize, Sequelize),
-  FiatXRate: FiatXRate.init(sequelize, Sequelize)
+  FiatXRate: FiatXRate.init(sequelize, Sequelize),
+  CryptoNews: CryptoNews.init(sequelize, Sequelize)
 }
 
 // This creates relationships in the ORM

@@ -4,6 +4,7 @@ import GlobalMarkets from '../models/GlobalMarkets'
 import CoinInfo from '../models/CoinInfo'
 import ResourceInfo from '../models/ResourceInfo'
 import XRate from '../models/XRate'
+import CryptoNews from '../models/CryptoNews'
 
 export default {
   saveXRates(rates) {
@@ -106,5 +107,16 @@ export default {
     });
 
     return defiMarkets
+  },
+
+  saveCryptoNews(news) {
+    return CryptoNews.bulkCreate(news, {
+      ignoreDuplicates: true
+    })
+  },
+
+  getCryptoNews() {
+    return CryptoNews.findAll()
   }
+
 }
