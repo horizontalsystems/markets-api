@@ -89,7 +89,7 @@ export default {
 
   async getDefiMarkets(fromTimestamp) {
     const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id,
-                    tbc.coingecko_id, tbc.code, tbc.name, tb1.tvl, tb1.timestamp,
+                    tbc.coingecko_id, tbc.code, tbc.name, tbc.image_url, tb1.tvl, tb1.timestamp,
                     CASE WHEN tb2.tvl <=0 THEN 0
                      ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
                     END AS tvl_diff
