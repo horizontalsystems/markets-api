@@ -18,6 +18,10 @@ class CoinInfo extends Sequelize.Model {
         address: {
           type: DataTypes.STRING
         },
+        imageUrl: {
+          type: DataTypes.STRING,
+          field: 'image_url'
+        },
         defillamaId: {
           type: DataTypes.STRING,
           unique: true,

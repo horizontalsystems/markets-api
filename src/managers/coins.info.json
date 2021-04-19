@@ -1,963 +1,1454 @@
 {
-    "version": 2,
-    "supported_currencies":[
-        {"code": "USD", "name": "US Dollar"},
-        {"code": "EUR", "name": "Euro"},
-        {"code": "GBP", "name": "Australian Dollar"},
-        {"code": "JPY", "name": "Japan Yen"},
-        {"code": "AUD", "name": "Australian Dollar"},
-        {"code": "CAD", "name": "Canadian Dollar"},
-        {"code": "SGD", "name": "Singapore Dollar"},
-        {"code": "BRL", "name": "Brazilian Real"},
-        {"code": "CHF", "name": "Swiss Franc"},
-        {"code": "CNY", "name": "Chinese Yuan"},
-        {"code": "HKD", "name": "Hong Kong Dollar"},
-        {"code": "ILS", "name": "Israeli New Sheke"},
-        {"code": "RUB", "name": "Russian Ruble"},
-        {"code": "TRY", "name": "Turkish Lira"}
-   ],
+    "version": 3,
+    "supported_currencies": [
+        { "code": "USD", "name": "US Dollar" },
+        { "code": "EUR", "name": "Euro" },
+        { "code": "GBP", "name": "Australian Dollar" },
+        { "code": "JPY", "name": "Japan Yen" },
+        { "code": "AUD", "name": "Australian Dollar" },
+        { "code": "CAD", "name": "Canadian Dollar" },
+        { "code": "SGD", "name": "Singapore Dollar" },
+        { "code": "BRL", "name": "Brazilian Real" },
+        { "code": "CHF", "name": "Swiss Franc" },
+        { "code": "CNY", "name": "Chinese Yuan" },
+        { "code": "HKD", "name": "Hong Kong Dollar" },
+        { "code": "ILS", "name": "Israeli New Sheke" },
+        { "code": "RUB", "name": "Russian Ruble" },
+        { "code": "TRY", "name": "Turkish Lira" }
+    ],
     "coins": [
         {
             "id": "1",
             "code": "UNI",
             "name": "Uniswap",
             "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
-            "coingecko_id": "uniswap"
+            "coingecko_id": "uniswap",
+            "image_url": "https://assets.coingecko.com/coins/images/12504/small/uniswap-uni.png?1600306604"
         },
         {
             "id": "2",
             "code": "WBTC",
             "name": "WBTC",
             "address": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
-            "coingecko_id": "wrapped-bitcoin"
+            "coingecko_id": "wrapped-bitcoin",
+            "image_url": "https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1548822744"
         },
         {
             "id": "3",
             "code": "CRV",
             "name": "Curve",
             "address": "0xd533a949740bb3306d119cc777fa900ba034cd52",
-            "coingecko_id": "curve-dao-token"
+            "coingecko_id": "curve-dao-token",
+            "image_url": "https://assets.coingecko.com/coins/images/12124/small/Curve.png?1597369484"
         },
         {
             "id": "111",
             "code": "AAVE",
             "name": "AAVE",
             "address": "0x7fc66500c84a76ad7e9c93437bfc5ac33e2ddae9",
-            "coingecko_id": "aave"
+            "coingecko_id": "aave",
+            "image_url": "https://assets.coingecko.com/coins/images/12645/small/AAVE.png?1601374110"
         },
         {
             "id": "112",
             "code": "FARM",
             "name": "Harvest Finance",
             "address": "0xa0246c9032bc3a600820415ae600c6388619a14d",
-            "coingecko_id": "harvest-finance"
+            "coingecko_id": "harvest-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/12304/small/Harvest.png?1613016180"
         },
         {
             "id": "113",
             "code": "YFI",
             "name": "Yearn Finance",
             "address": "0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e",
-            "coingecko_id": "yearn-finance"
+            "coingecko_id": "yearn-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/11849/small/yfi-192x192.png?1598325330"
         },
         {
             "id": "114",
             "code": "COMP",
             "name": "Compound",
             "address": "0xc00e94cb662c3520282e6f5717214004a7f26888",
-            "coingecko_id": "compound-governance-token"
+            "coingecko_id": "compound-governance-token",
+            "image_url": "https://assets.coingecko.com/coins/images/10775/small/COMP.png?1592625425"
         },
         {
             "id": "115",
             "code": "SNX",
             "name": "Synthetix ",
             "address": "0xc011a73ee8576fb46f5e1c5751ca3b9fe0af2a6f",
-            "coingecko_id": "synthetix-network-token"
+            "coingecko_id": "synthetix-network-token",
+            "image_url": "https://assets.coingecko.com/coins/images/3406/small/SNX.png?1598631139"
         },
         {
             "id": "116",
             "code": "BAL",
             "name": "Balancer",
             "address": "0xba100000625a3754423978a60c9317c58a424e3d",
-            "coingecko_id": "balancer"
+            "coingecko_id": "balancer",
+            "image_url": "https://assets.coingecko.com/coins/images/11683/small/Balancer.png?1592792958"
         },
         {
             "id": "117",
             "code": "renBTC",
             "name": "REN Protocol",
             "address": "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d",
-            "coingecko_id": "republic-protocol"
+            "coingecko_id": "republic-protocol",
+            "image_url": "https://assets.coingecko.com/coins/images/3139/small/REN.png?1589985807"
         },
         {
             "id": "118",
             "code": "MKR",
             "name": "MakerDAO",
             "address": "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2",
-            "coingecko_id": "maker"
+            "coingecko_id": "maker",
+            "image_url": "https://assets.coingecko.com/coins/images/1364/small/Mark_Maker.png?1585191826"
         },
         {
             "id": "119",
             "code": "SUSHI",
             "name": "SushiSwap",
             "address": "0x6b3595068778dd592e39a122f4f5a5cf09c90fe2",
-            "coingecko_id": "sushi"
+            "coingecko_id": "sushi",
+            "image_url": "https://assets.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png?1606986688"
         },
-        { "id": "120", "code": "-", "name": "InstaDApp", "address": "", "coingecko_id": "instadapp" },
+        {
+            "id": "120",
+            "code": "-",
+            "name": "InstaDApp",
+            "address": "",
+            "coingecko_id": "instadapp",
+            "image_url": "https://icons.llama.fi/instadapp.jpg"
+        },
         {
             "id": "121",
             "code": "CREAM",
             "name": "CREAM Finance",
             "address": "0x2ba592f78db6436527729929aaf6c908497cb200",
-            "coingecko_id": "cream"
+            "coingecko_id": "cream",
+            "image_url": "https://assets.coingecko.com/coins/images/1155/small/cream.png?1547035172"
         },
         {
             "id": "122",
             "code": "NXM",
             "name": "Nexus Mutual",
             "address": "0xd7c49cee7e9188cca6ad8ff264c1da2e69d4cf3b",
-            "coingecko_id": "nexus"
+            "coingecko_id": "nexus",
+            "image_url": "https://assets.coingecko.com/coins/images/576/small/nexus-logo.png?1547034256"
         },
         {
             "id": "123",
             "code": "DF",
             "name": "dForce",
             "address": "0x431ad2ff6a9c365805ebad47ee021148d6f7dbe0",
-            "coingecko_id": "dforce-token"
+            "coingecko_id": "dforce-token",
+            "image_url": "https://assets.coingecko.com/coins/images/9709/small/xlGxxIjI_400x400.jpg?1571006794"
         },
         {
             "id": "124",
             "code": "KEEP",
             "name": "KEEP Network",
             "address": "0x8daebade922df735c38c80c7ebd708af50815faa",
-            "coingecko_id": "keep-network"
+            "coingecko_id": "keep-network",
+            "image_url": "https://assets.coingecko.com/coins/images/3373/small/IuNzUb5b_400x400.jpg?1589526336"
         },
         {
             "id": "125",
             "code": "MTA",
             "name": "mStable",
             "address": "0xa3bed4e1c75d00fa6f4e5e6922db7261b5e9acd2",
-            "coingecko_id": "meta"
+            "coingecko_id": "meta",
+            "image_url": "https://assets.coingecko.com/coins/images/11846/small/mStable.png?1594950533"
         },
         {
             "id": "126",
             "code": "LRC",
             "name": "Loopring",
             "address": "0xbbbbca6a901c926f240b89eacb641d8aec7aeafd",
-            "coingecko_id": "loopring"
+            "coingecko_id": "loopring",
+            "image_url": "https://assets.coingecko.com/coins/images/913/small/LRC.png?1572852344"
         },
         {
             "id": "127",
             "code": "KNC",
             "name": "Kyber",
             "address": "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
-            "coingecko_id": "kyber-network"
+            "coingecko_id": "kyber-network",
+            "image_url": "https://assets.coingecko.com/coins/images/947/small/kyber-logo.png?1547034806"
         },
         {
             "id": "128",
             "code": "HEGIC",
             "name": "Hegic",
             "address": "0x584bc13c7d411c00c01a62e8019472de68768430",
-            "coingecko_id": "hegic"
+            "coingecko_id": "hegic",
+            "image_url": "https://assets.coingecko.com/coins/images/12454/small/Hegic.png?1599938210"
         },
         {
             "id": "129",
             "code": "STAKE",
             "name": "xDAI Stake",
             "address": "0x0ae055097c6d159879521c384f1d2123d1f195e6",
-            "coingecko_id": "xdai-stake"
+            "coingecko_id": "xdai-stake",
+            "image_url": "https://assets.coingecko.com/coins/images/11061/small/xdai.png?1587714165"
         },
         {
             "id": "130",
             "code": "imBTC",
             "name": "imToken",
             "address": "0x3212b29e33587a00fb1c83346f5dbfa69a458923",
-            "coingecko_id": "imbtc"
+            "coingecko_id": "imbtc",
+            "image_url": "https://assets.coingecko.com/coins/images/13988/small/imbtc.png?1613487586"
         },
         {
             "id": "131",
             "code": "BOND",
             "name": "BarnBridge",
             "address": "0x0391d2021f89dc339f60fff84546ea23e337750f",
-            "coingecko_id": "barnbridge"
+            "coingecko_id": "barnbridge",
+            "image_url": "https://assets.coingecko.com/coins/images/12811/small/barnbridge.jpg?1602728853"
         },
         {
             "id": "132",
             "code": "hBTC",
             "name": "hBTC",
             "address": "0x0316eb71485b0ab14103307bf65a021042c6d380",
-            "coingecko_id": "huobi-btc"
+            "coingecko_id": "huobi-btc",
+            "image_url": "https://assets.coingecko.com/coins/images/12407/small/Unknown-5.png?1599624896"
         },
-        { "id": "133", "code": "-", "name": "Shell Protocol", "address": "", "coingecko_id": "" },
+        {
+            "id": "133",
+            "code": "-",
+            "name": "Shell Protocol",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/FR750pnZ_400x400.jpg"
+        },
         {
             "id": "134",
             "code": "PICKLE",
             "name": "Pickle",
             "address": "0x429881672b9ae42b8eba0e26cd9c73711b891ca5",
-            "coingecko_id": "pickle-finance"
+            "coingecko_id": "pickle-finance",
+            "image_url": "https://icons.llama.fi/439Roxx3_400x400.jpg"
         },
-        { "id": "135", "code": "KAVA", "name": "Kava", "address": "", "coingecko_id": "kava" },
+        {
+            "id": "135",
+            "code": "KAVA",
+            "name": "Kava",
+            "address": "",
+            "coingecko_id": "kava",
+            "image_url": "https://icons.llama.fi/ECfmsFee_400x400.png"
+        },
         {
             "id": "136",
             "code": "RGT",
             "name": "Rari Capital",
             "address": "0xd291e7a03283640fdc51b121ac401383a46cc623",
-            "coingecko_id": "rari-governance-token"
+            "coingecko_id": "rari-governance-token",
+            "image_url": "https://icons.llama.fi/ZyleKD4B_400x400.jpg"
         },
-        { "id": "137", "code": "RUNE", "name": "Thorchain", "address": "", "coingecko_id": "thorchain" },
+        {
+            "id": "137",
+            "code": "RUNE",
+            "name": "Thorchain",
+            "address": "",
+            "coingecko_id": "thorchain",
+            "image_url": "https://icons.llama.fi/p1ecyvxG_400x400.jpg"
+        },
         {
             "id": "138",
             "code": "HAKKA",
             "name": "Hakka Finance",
             "address": "0x0e29e5abbb5fd88e28b2d355774e73bd47de3bcd",
-            "coingecko_id": "hakka-finance"
+            "coingecko_id": "hakka-finance",
+            "image_url": ""
         },
         {
             "id": "139",
             "code": "SNOW",
             "name": "SnowSwap",
             "address": "0xfe9a29ab92522d14fc65880d817214261d8479ae",
-            "coingecko_id": "snowswap"
+            "coingecko_id": "snowswap",
+            "image_url": "https://icons.llama.fi/oWZl3IYr_400x400.jpg"
         },
-        { "id": "140", "code": "HARD", "name": "Hard Protocol", "address": "", "coingecko_id": "hard-protocol" },
+        {
+            "id": "140",
+            "code": "HARD",
+            "name": "Hard Protocol",
+            "address": "",
+            "coingecko_id": "hard-protocol",
+            "image_url": "https://icons.llama.fi/qv-OI4YK_400x400.png"
+        },
         {
             "id": "141",
             "code": "UMA",
             "name": "UMA Protocol",
             "address": "0x04fa0d235c4abf4bcf4787af4cf447de572ef828",
-            "coingecko_id": "uma"
+            "coingecko_id": "uma",
+            "image_url": ""
         },
         {
             "id": "142",
             "code": "SWRV",
             "name": "Swerve",
             "address": "0xb8baa0e4287890a5f79863ab62b7f175cecbd433",
-            "coingecko_id": "swerve-dao"
+            "coingecko_id": "swerve-dao",
+            "image_url": ""
         },
         {
             "id": "143",
             "code": "AMP",
             "name": "Amp",
             "address": "0xff20817765cb7f73d4bde2e66e067e58d11095c2",
-            "coingecko_id": "amp"
+            "coingecko_id": "amp",
+            "image_url": "https://icons.llama.fi/flexa.png_small"
         },
-        { "id": "144", "code": "-", "name": "dYdX", "address": "", "coingecko_id": "" },
-        { "id": "145", "code": "SRM", "name": "Serum", "address": "", "coingecko_id": "serum" },
+        {
+            "id": "144",
+            "code": "-",
+            "name": "dYdX",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/-m722G1f_400x400.jpg"
+        },
+        {
+            "id": "145",
+            "code": "SRM",
+            "name": "Serum",
+            "address": "",
+            "coingecko_id": "serum",
+            "image_url": "https://icons.llama.fi/9yyO0Klj_400x400.jpg"
+        },
         {
             "id": "146",
             "code": "DODO",
             "name": "DODO",
             "address": "0x43dfc4159d86f3a37a5a4b3d4580b888ad7d4ddd",
-            "coingecko_id": "dodo"
+            "coingecko_id": "dodo",
+            "image_url": "https://icons.llama.fi/wG29L0wM_400x400.png"
         },
-        { "id": "148", "code": "-", "name": "Tornado Cash", "address": "", "coingecko_id": "tornado-cash" },
-        { "id": "149", "code": "-", "name": "B.Protocol", "address": "", "coingecko_id": "" },
+        {
+            "id": "148",
+            "code": "-",
+            "name": "Tornado Cash",
+            "address": "",
+            "coingecko_id": "tornado-cash",
+            "image_url": "https://icons.llama.fi/ZINt8NSB_400x400.jpg"
+        },
+        {
+            "id": "149",
+            "code": "-",
+            "name": "B.Protocol",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/jPH5weGQ_400x400.jpg"
+        },
         {
             "id": "150",
             "code": "IDLE",
             "name": "Idle Finance",
             "address": "0x875773784af8135ea0ef43b5a374aad105c5d39e",
-            "coingecko_id": "idle"
+            "coingecko_id": "idle",
+            "image_url": "https://icons.llama.fi/BiCdsrIH_400x400.png"
         },
         {
             "id": "151",
             "code": "NEC",
             "name": "DeversiFi",
             "address": "0xcc80c051057b774cd75067dc48f8987c4eb97a5e",
-            "coingecko_id": "nectar-token"
+            "coingecko_id": "nectar-token",
+            "image_url": "https://icons.llama.fi/WC8lhLs5_400x400.jpg"
         },
         {
             "id": "152",
             "code": "REP",
             "name": "Augur",
             "address": "0x221657776846890989a759ba2973e427dff5c9bb",
-            "coingecko_id": "augur"
+            "coingecko_id": "augur",
+            "image_url": "https://icons.llama.fi/gHlsZLWU_400x400.png"
         },
         {
             "id": "153",
             "code": "COFI",
             "name": "CoFiX",
             "address": "0x1a23a6bfbadb59fa563008c0fb7cf96dfcf34ea1",
-            "coingecko_id": "cofix"
+            "coingecko_id": "cofix",
+            "image_url": "https://icons.llama.fi/dnPnSkfa_400x400.jpg"
         },
         {
             "id": "155",
             "code": "ROOK",
             "name": "KeeperDAO",
             "address": "0xfa5047c9c78b8877af97bdcb85db743fd7313d4a",
-            "coingecko_id": "rook"
+            "coingecko_id": "rook",
+            "image_url": "https://icons.llama.fi/z8n7Rb13_400x400.jpg"
         },
         {
             "id": "156",
             "code": "zLot",
             "name": "zLot",
             "address": "0xa8e7ad77c60ee6f30bac54e2e7c0617bd7b5a03e",
-            "coingecko_id": "zlot"
+            "coingecko_id": "zlot",
+            "image_url": "https://icons.llama.fi/OS3WBPFJ_400x400.jpg"
         },
         {
             "id": "157",
             "code": "MPH",
             "name": "88mph",
             "address": "0x8888801af4d980682e47f1a9036e589479e835c5",
-            "coingecko_id": "88mph"
+            "coingecko_id": "88mph",
+            "image_url": "https://icons.llama.fi/yfU-_Tcj_400x400.png"
         },
         {
             "id": "158",
             "code": "DRC",
             "name": "Dracula",
             "address": "0xb78b3320493a4efaa1028130c5ba26f0b6085ef8",
-            "coingecko_id": "dracula-token"
+            "coingecko_id": "dracula-token",
+            "image_url": "https://icons.llama.fi/zDPmiv40_400x400.png"
         },
         {
             "id": "159",
             "code": "GRO",
             "name": "Growth DeFi",
             "address": "0x09e64c2b61a5f1690ee6fbed9baf5d6990f8dfd0",
-            "coingecko_id": "growth-defi"
+            "coingecko_id": "growth-defi",
+            "image_url": "https://icons.llama.fi/ijnFH9ZE_400x400.png"
         },
         {
             "id": "160",
             "code": "ALPHA",
             "name": "Alpha Finance",
             "address": "0xa1faa113cbe53436df28ff0aee54275c13b40975",
-            "coingecko_id": "alpha-finance"
+            "coingecko_id": "alpha-finance",
+            "image_url": "https://icons.llama.fi/AlphaToken_512x512.png"
         },
         {
             "id": "161",
             "code": "BOR",
             "name": "BoringDAO",
             "address": "0x3c9d6c1c73b31c837832c72e04d3152f051fc1a9",
-            "coingecko_id": "boringdao"
+            "coingecko_id": "boringdao",
+            "image_url": "https://icons.llama.fi/irryNMYm_400x400.jpg"
         },
         {
             "id": "162",
             "code": "BNT",
             "name": "Bancor",
             "address": "0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c",
-            "coingecko_id": "bancor"
+            "coingecko_id": "bancor",
+            "image_url": "https://icons.llama.fi/pKhMnarD_400x400.png"
         },
         {
             "id": "163",
             "code": "FOR",
             "name": "ForTube",
             "address": "0x1fcdce58959f536621d76f5b7ffb955baa5a672f",
-            "coingecko_id": "force-protocol"
+            "coingecko_id": "force-protocol",
+            "image_url": "https://icons.llama.fi/EJnnBDeZ_400x400.jpg"
         },
         {
             "id": "164",
             "code": "VALUE",
             "name": "ValueDefi",
             "address": "0x49e833337ece7afe375e44f4e3e8481029218e5c",
-            "coingecko_id": "value-liquidity"
+            "coingecko_id": "value-liquidity",
+            "image_url": "https://icons.llama.fi/jN72Swyu_400x400.jpg"
         },
         {
             "id": "165",
             "code": "COVER",
             "name": "Cover Protocol",
             "address": "0x5d8d9f5b96f4438195be9b99eee6118ed4304286",
-            "coingecko_id": "cover-protocol"
+            "coingecko_id": "cover-protocol",
+            "image_url": "https://icons.llama.fi/1VPyoo_r_400x400.jpg"
         },
         {
             "id": "166",
             "code": "TRU",
             "name": "TrueFi",
             "address": "0x4c19596f5aaff459fa38b0f7ed92f11ae6543784",
-            "coingecko_id": "truefi"
+            "coingecko_id": "truefi",
+            "image_url": "https://icons.llama.fi/4kwLEUTx_400x400.jpg"
         },
         {
             "id": "167",
             "code": "DOUGH",
             "name": "PieDAO",
             "address": "0xad32a8e6220741182940c5abf610bde99e737b2d",
-            "coingecko_id": "piedao-dough-v2"
+            "coingecko_id": "piedao-dough-v2",
+            "image_url": "https://icons.llama.fi/4Qb2jwin_400x400.jpg"
         },
         {
             "id": "168",
             "code": "DEV",
             "name": "Dev Protocol",
             "address": "0x5caf454ba92e6f2c929df14667ee360ed9fd5b26",
-            "coingecko_id": "dev-protocol"
+            "coingecko_id": "dev-protocol",
+            "image_url": "https://icons.llama.fi/08leXwpT_400x400.jpg"
         },
         {
             "id": "169",
             "code": "BAC",
             "name": "Basis Cash",
             "address": "0x3449fc1cd036255ba1eb19d65ff4ba2b8903a69a",
-            "coingecko_id": "basis-cash"
+            "coingecko_id": "basis-cash",
+            "image_url": "https://icons.llama.fi/2_vq9Ovq_400x400.jpg"
         },
         {
             "id": "170",
             "code": "FNX",
             "name": "FinNexus",
             "address": "0xef9cd7882c067686691b6ff49e650b43afbbcc6b",
-            "coingecko_id": "finnexus"
+            "coingecko_id": "finnexus",
+            "image_url": "https://icons.llama.fi/fShXtXh-_400x400.jpg"
         },
         {
             "id": "171",
             "code": "SYN",
             "name": "SynLev",
             "address": "0x1695936d6a953df699c38ca21c2140d497c08bd9",
-            "coingecko_id": "synlev"
+            "coingecko_id": "synlev",
+            "image_url": "https://icons.llama.fi/ckvE1JTJ_400x400.jpg"
         },
         {
             "id": "172",
             "code": "INDEX",
             "name": "Index Coop",
             "address": "0x0954906da0bf32d5479e25f46056d22f08464cab",
-            "coingecko_id": "index-cooperative"
+            "coingecko_id": "index-cooperative",
+            "image_url": "https://assets.coingecko.com/coins/images/12729/small/c7w3TmXs_400x400.png?1602630788"
         },
         {
             "id": "173",
             "code": "BADGER",
             "name": "Badger DAO",
             "address": "0x3472a5a71965499acd81997a54bba8d852c6e53d",
-            "coingecko_id": "badger-dao"
+            "coingecko_id": "badger-dao",
+            "image_url": "https://icons.llama.fi/3_dd6SJB_400x400.jpg"
         },
         {
             "id": "174",
             "code": "BT",
             "name": "BT.Finance",
             "address": "0x76c5449f4950f6338a393f53cda8b53b0cd3ca3a",
-            "coingecko_id": "bt-finance"
+            "coingecko_id": "bt-finance",
+            "image_url": "https://icons.llama.fi/cOYS4CCl_400x400.jpg"
         },
         {
             "id": "175",
             "code": "N3RDz",
             "name": "N3RD Finance",
             "address": "0x32c868f6318d6334b2250f323d914bc2239e4eee",
-            "coingecko_id": "n3rd-finance"
+            "coingecko_id": "n3rd-finance",
+            "image_url": "https://icons.llama.fi/ChNmBBtq_400x400.jpg"
         },
         {
             "id": "176",
             "code": "MM",
             "name": "MM Token",
             "address": "0xa283aa7cfbb27ef0cfbcb2493dd9f4330e0fd304",
-            "coingecko_id": "mm-token"
+            "coingecko_id": "mm-token",
+            "image_url": "https://icons.llama.fi/tkO-K5_1_400x400.jpg"
         },
-        { "id": "177", "code": "-", "name": "DefiSaver", "address": "", "coingecko_id": "" },
-        { "id": "178", "code": "DFI", "name": "DefiChain", "address": "", "coingecko_id": "defichain" },
+        {
+            "id": "177",
+            "code": "-",
+            "name": "DefiSaver",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/VDvnjUE7_400x400.jpg"
+        },
+        {
+            "id": "178",
+            "code": "DFI",
+            "name": "DefiChain",
+            "address": "",
+            "coingecko_id": "defichain",
+            "image_url": "https://icons.llama.fi/nQdI8k_n_400x400.jpg"
+        },
         {
             "id": "179",
             "code": "YFL",
             "name": "YF Link",
             "address": "0x28cb7e841ee97947a86b06fa4090c8451f64c0be",
-            "coingecko_id": "yflink"
+            "coingecko_id": "yflink",
+            "image_url": "https://icons.llama.fi/KRddVLzb_400x400.jpg"
         },
-        { "id": "180", "code": "-", "name": "Demex", "address": "", "coingecko_id": "" },
+        {
+            "id": "180",
+            "code": "-",
+            "name": "Demex",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/2rOYmzj7_400x400.png"
+        },
         {
             "id": "181",
             "code": "OM",
             "name": "MANTRA DAO",
             "address": "0x3593d125a4f7849a1b059e64f4517a86dd60c95d",
-            "coingecko_id": "mantra-dao"
+            "coingecko_id": "mantra-dao",
+            "image_url": "https://icons.llama.fi/l2RmvEyc_400x400.jpg"
         },
         {
             "id": "182",
             "code": "LDO",
             "name": "Lido",
             "address": "0x5a98fcbea516cf06857215779fd812ca3bef1b32",
-            "coingecko_id": "lido-dao"
+            "coingecko_id": "lido-dao",
+            "image_url": "https://assets.coingecko.com/coins/images/13573/small/Lido_DAO.png?1609873644"
         },
-        { "id": "183", "code": "WING", "name": "Wing Finance", "address": "", "coingecko_id": "wing-finance" },
+        {
+            "id": "183",
+            "code": "WING",
+            "name": "Wing Finance",
+            "address": "",
+            "coingecko_id": "wing-finance",
+            "image_url": "https://icons.llama.fi/unlUa5-__400x400.jpg"
+        },
         {
             "id": "184",
             "code": "FUSE",
             "name": "Fuse",
             "address": "0x970b9bb2c0444f5e81e9d0efb84c8ccdcdcaf84d",
-            "coingecko_id": "fuse-network-token"
+            "coingecko_id": "fuse-network-token",
+            "image_url": "https://icons.llama.fi/s-SdhVYj_400x400.jpg"
         },
-        { "id": "186", "code": "WASP", "name": "WanSwap Dex", "address": "", "coingecko_id": "" },
-        { "id": "187", "code": "-", "name": "Unagii", "address": "", "coingecko_id": "" },
+        {
+            "id": "186",
+            "code": "WASP",
+            "name": "WanSwap Dex",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/OWIhzGn8_400x400.jpg"
+        },
+        {
+            "id": "187",
+            "code": "-",
+            "name": "Unagii",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/YWZ68hSA_400x400.jpg"
+        },
         {
             "id": "188",
             "code": "NDX",
             "name": "Indexed Finance",
             "address": "0x86772b1409b61c639eaac9ba0acfbb6e238e5f83",
-            "coingecko_id": "indexed-finance"
+            "coingecko_id": "indexed-finance",
+            "image_url": "https://icons.llama.fi/kIv5abLc_400x400.jpg"
         },
         {
             "id": "189",
             "code": "1INCH",
             "name": "1inch",
             "address": "0x111111111117dc0aa78b770fa6a738034120c302",
-            "coingecko_id": "1inch"
+            "coingecko_id": "1inch",
+            "image_url": "https://icons.llama.fi/JWXLyjdz_400x400.jpg"
         },
         {
             "id": "190",
             "code": "DHT",
             "name": "dHEDGE",
             "address": "0xca1207647ff814039530d7d35df0e1dd2e91fa84",
-            "coingecko_id": "dhedge-dao"
+            "coingecko_id": "dhedge-dao",
+            "image_url": "https://assets.coingecko.com/coins/images/12508/small/dht.png?1600752201"
         },
         {
             "id": "191",
             "code": "OPIUM",
             "name": "Opium",
             "address": "0x888888888889c00c67689029d7856aac1065ec11",
-            "coingecko_id": "opium"
+            "coingecko_id": "opium",
+            "image_url": "https://assets.coingecko.com/coins/images/13758/small/opium-token-black_%281%29.png?1611767960"
         },
         {
             "id": "192",
             "code": "GDAO",
             "name": "Governor DAO",
             "address": "0x515d7e9d75e2b76db60f8a051cd890eba23286bc",
-            "coingecko_id": "governor-dao"
+            "coingecko_id": "governor-dao",
+            "image_url": "https://assets.coingecko.com/coins/images/13140/small/GDAOlogo2-bird.png?1605591842"
         },
         {
             "id": "193",
             "code": "DUCK",
             "name": "Unit Protocol New",
             "address": "0x92e187a03b6cd19cb6af293ba17f2745fd2357d5",
-            "coingecko_id": "unit-protocol-duck"
+            "coingecko_id": "unit-protocol-duck",
+            "image_url": "https://assets.coingecko.com/coins/images/13359/small/unit_telegram.png?1607878022"
         },
-        { "id": "194", "code": "CAKE", "name": "PancakeSwap", "address": "", "coingecko_id": "pancakeswap" },
+        {
+            "id": "194",
+            "code": "CAKE",
+            "name": "PancakeSwap",
+            "address": "",
+            "coingecko_id": "pancakeswap",
+            "image_url": "https://icons.llama.fi/c6z3sWsY_400x400.jpg"
+        },
         {
             "id": "195",
             "code": "DFD",
             "name": "DefiDollar",
             "address": "0x20c36f062a31865bed8a5b1e512d9a1a20aa333a",
-            "coingecko_id": "defidollar-dao"
+            "coingecko_id": "defidollar-dao",
+            "image_url": "https://assets.coingecko.com/coins/images/12959/small/DFD.jpg?1604415975"
         },
         {
             "id": "196",
             "code": "FTM",
             "name": "Fantom",
             "address": "0x4e15361fd6b4bb609fa63c81a2be19d873717870",
-            "coingecko_id": "fantom"
+            "coingecko_id": "fantom",
+            "image_url": "https://assets.coingecko.com/coins/images/4001/small/Fantom.png?1558015016"
         },
         {
             "id": "197",
             "code": "BZRX",
             "name": "bZx",
             "address": "0x56d811088235f11c8920698a204a5010a788f4b3",
-            "coingecko_id": "bzx-protocol"
+            "coingecko_id": "bzx-protocol",
+            "image_url": "https://assets.coingecko.com/coins/images/11811/small/bzrx.png?1594563172"
         },
         { "id": "198", "code": "PRV", "name": "Privacy", "address": "", "coingecko_id": "privacy" },
-        { "id": "199", "code": "-", "name": "Sablier Finance", "address": "", "coingecko_id": "" },
+        {
+            "id": "199",
+            "code": "-",
+            "name": "Sablier Finance",
+            "address": "",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/nlJtmWT1_400x400.jpg"
+        },
         {
             "id": "200",
             "code": "BEL",
             "name": "Bella Protocol",
             "address": "0xa91ac63d040deb1b7a5e4d4134ad23eb0ba07e14",
-            "coingecko_id": "bella-protocol"
+            "coingecko_id": "bella-protocol",
+            "image_url": "https://assets.coingecko.com/coins/images/12478/small/Bella.png?1602230054"
         },
-        { "id": "202", "code": "-", "name": "Saddle Finance", "address": "-", "coingecko_id": "" },
+        {
+            "id": "202",
+            "code": "-",
+            "name": "Saddle Finance",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/yXSXL3Je_400x400.jpg"
+        },
         {
             "id": "203",
             "code": "SI",
             "name": "Siren",
             "address": "0xd23ac27148af6a2f339bd82d0e3cff380b5093de",
-            "coingecko_id": "siren"
+            "coingecko_id": "siren",
+            "image_url": "https://assets.coingecko.com/coins/images/13955/small/siren_logo.png?1613310803"
         },
         {
             "id": "204",
             "code": "ALCX",
             "name": "Alchemix",
             "address": "0xdbdb4d16eda451d0503b854cf79d55697f90c8df",
-            "coingecko_id": "alchemix"
+            "coingecko_id": "alchemix",
+            "image_url": "https://assets.coingecko.com/coins/images/14113/small/Alchemix.png?1614409874"
         },
-        { "id": "205", "code": "EGG", "name": "Goose Finance", "address": "-", "coingecko_id": "goose-finance" },
+        {
+            "id": "205",
+            "code": "EGG",
+            "name": "Goose Finance",
+            "address": "-",
+            "coingecko_id": "goose-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/13951/small/JNnBWAE4XEJD9Ty7x8A1RlJ8dvA7hcOe7C1LkQSWwuSlD6HcCz3V8fN44B6du2k4owhlLJZU3r6M6HcK0dkpMe53kkqYsESpfx9w8vU8t_PnykuyaGnLKXLJeZqEAP1C9Wi3G3sqfbTeHi32_msxtMMyUmIRgzBbDdp-adg6mIbst_8a7JknMgmdkORNydmX4Ptk8YUtZhoWewY.png?1613250907"
+        },
         {
             "id": "206",
             "code": "XTK",
             "name": "xToken",
             "address": "0x7f3edcdd180dbe4819bd98fee8929b5cedb3adeb",
-            "coingecko_id": "xtoken"
+            "coingecko_id": "xtoken",
+            "image_url": "https://assets.coingecko.com/coins/images/14089/small/xToken.png?1614226407"
         },
         {
             "id": "207",
             "code": "USF",
             "name": "Unslashed",
             "address": "0xe0e05c43c097b0982db6c9d626c4eb9e95c3b9ce",
-            "coingecko_id": "unslashed-finance"
+            "coingecko_id": "unslashed-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/14177/small/Unslashed.jpeg?1614793365"
         },
-        { "id": "208", "code": "ACS", "name": "ACryptoS", "address": "", "coingecko_id": "acryptos" },
+        {
+            "id": "208",
+            "code": "ACS",
+            "name": "ACryptoS",
+            "address": "",
+            "coingecko_id": "acryptos",
+            "image_url": "https://assets.coingecko.com/coins/images/13276/small/favicon-200x200.png?1606894442"
+        },
         {
             "id": "209",
             "code": "AUTO",
             "name": "Autofarm",
             "address": "0xa184088a740c695e156f91f5cc086a06bb78b827",
-            "coingecko_id": "auto"
+            "coingecko_id": "auto",
+            "image_url": "https://assets.coingecko.com/coins/images/13751/small/autofarm_icon_200x200.png?1611494288"
         },
         {
             "id": "210",
             "code": "YAX",
             "name": "yAxis",
             "address": "0xb1dc9124c395c1e97773ab855d66e879f053a289",
-            "coingecko_id": "yaxis"
+            "coingecko_id": "yaxis",
+            "image_url": "https://assets.coingecko.com/coins/images/12620/small/Logo.png?1608310944"
         },
-        { "id": "211", "code": "-", "name": "Smoothy", "address": "-", "coingecko_id": "" },
+        {
+            "id": "211",
+            "code": "-",
+            "name": "Smoothy",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/dDxKgwPN_400x400.jpg"
+        },
         {
             "id": "212",
             "code": "XVS",
             "name": "Venus",
             "address": "0xcf6bb5389c92bdda8a3747ddb454cb7a64626c63",
-            "coingecko_id": "venus"
+            "coingecko_id": "venus",
+            "image_url": "https://assets.coingecko.com/coins/images/12677/small/venus.png?1618319812"
         },
         {
             "id": "213",
             "code": "ONX",
             "name": "OnX.Finance",
             "address": "0xe0ad1806fd3e7edf6ff52fdb822432e847411033",
-            "coingecko_id": "onx-finance"
+            "coingecko_id": "onx-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/13445/small/onxlogo-1.png?1608629659"
         },
         {
             "id": "214",
             "code": "RAY",
             "name": "Raydium",
             "address": "4k3dyjzvzp8emzwuxbbcjevwskkk59s5icnly3qrkx6r",
-            "coingecko_id": "raydium"
+            "coingecko_id": "raydium",
+            "image_url": "https://assets.coingecko.com/coins/images/13928/small/PSigc4ie_400x400.jpg?1612875614"
         },
         {
             "id": "215",
             "code": "TRDL",
             "name": "Strudel Finance",
             "address": "0x297d33e17e61c2ddd812389c2105193f8348188a",
-            "coingecko_id": "strudel-finance"
+            "coingecko_id": "strudel-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/13854/small/1614634281474-TRDL_LOGO_PNG.png?1614671874"
         },
         {
             "id": "216",
             "code": "AUC",
             "name": "Auctus",
             "address": "0xc12d099be31567add4e4e4d0d45691c3f58f5663",
-            "coingecko_id": "auctus"
+            "coingecko_id": "auctus",
+            "image_url": "https://assets.coingecko.com/coins/images/2165/small/Auctus.png?1593479271"
         },
-        { "id": "217", "code": "-", "name": "Connext", "address": "-", "coingecko_id": "" },
+        {
+            "id": "217",
+            "code": "-",
+            "name": "Connext",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/ZSU1xz91_400x400.png"
+        },
         {
             "id": "218",
             "code": "CORE",
             "name": "cVault.finance",
             "address": "0x62359ed7505efc61ff1d56fef82158ccaffa23d7",
-            "coingecko_id": "cvault-finance"
+            "coingecko_id": "cvault-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/12635/small/cvault.finance_logo.png?1601353499"
         },
-        { "id": "219", "code": "-", "name": "DDEX", "address": "-", "coingecko_id": "" },
+        {
+            "id": "219",
+            "code": "-",
+            "name": "DDEX",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/Cd-ILEu6_400x400.png"
+        },
         {
             "id": "220",
             "code": "VSP",
             "name": "Vesper",
             "address": "0x1b40183efb4dd766f11bda7a7c3ad8982e998421",
-            "coingecko_id": "vesper-finance"
+            "coingecko_id": "vesper-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/13527/small/vesper_logo.jpg?1609399927"
         },
         {
             "id": "221",
             "code": "CRO",
             "name": "Crypto.com Coin",
             "address": "0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b",
-            "coingecko_id": "crypto-com-chain"
+            "coingecko_id": "crypto-com-chain",
+            "image_url": "https://assets.coingecko.com/coins/images/7310/small/cypto.png?1547043960"
         },
         {
             "id": "222",
             "code": "FIN",
             "name": "DeFiner",
             "address": "0x054f76beed60ab6dbeb23502178c52d6c5debe40",
-            "coingecko_id": "definer"
+            "coingecko_id": "definer",
+            "image_url": "https://assets.coingecko.com/coins/images/12780/small/PdaW8Lb.png?1602500407"
         },
         {
             "id": "223",
             "code": "DDX",
             "name": "DerivaDAO",
             "address": "0x3a880652f47bfaa771908c07dd8673a787daed3a",
-            "coingecko_id": "derivadao"
+            "coingecko_id": "derivadao",
+            "image_url": "https://assets.coingecko.com/coins/images/13453/small/ddx_logo.png?1608741641"
         },
         {
             "id": "224",
             "code": "DEXTF",
             "name": "DEXTF Protocol",
             "address": "0x5f64ab1544d28732f0a24f4713c2c8ec0da089f0",
-            "coingecko_id": "dextf"
+            "coingecko_id": "dextf",
+            "image_url": "https://assets.coingecko.com/coins/images/12634/small/DEXTFiconNEGATIVE-page-001.jpg?1601349042"
         },
         {
             "id": "225",
             "code": "MLN",
             "name": "Enzyme Finance",
             "address": "0xec67005c4e498ec7f55e092bd1d35cbc47c91892",
-            "coingecko_id": "melon"
+            "coingecko_id": "melon",
+            "image_url": "https://assets.coingecko.com/coins/images/605/small/Enzyme_Icon_Secondary.png?1611576629"
         },
         {
             "id": "226",
             "code": "NMR",
             "name": "Numeraire",
             "address": "0x1776e1f26f98b1a5df9cd347953a26dd3cb46671",
-            "coingecko_id": "numeraire"
+            "coingecko_id": "numeraire",
+            "image_url": "https://assets.coingecko.com/coins/images/752/small/numeraire.png?1592538976"
         },
         {
             "id": "227",
             "code": "CREAM",
             "name": "CreamSwap",
             "address": "0x2ba592f78db6436527729929aaf6c908497cb200",
-            "coingecko_id": "cream-2"
+            "coingecko_id": "cream-2",
+            "image_url": "https://assets.coingecko.com/coins/images/11976/small/Cream.png?1596593418"
         },
         {
             "id": "228",
             "code": "FST",
             "name": "FutureSwap",
             "address": "0x0e192d382a36de7011f795acc4391cd302003606",
-            "coingecko_id": "futureswap"
+            "coingecko_id": "futureswap",
+            "image_url": "https://icons.llama.fi/f5BrWYY8_400x400.jpg"
         },
         {
             "id": "229",
             "code": "GNO",
             "name": "Gnosis",
             "address": "0x6810e776880c02933d47db1b9fc05908e5386b96",
-            "coingecko_id": "gnosis"
+            "coingecko_id": "gnosis",
+            "image_url": "https://assets.coingecko.com/coins/images/662/small/logo_square_simple_300px.png?1609402668"
         },
         {
             "id": "230",
             "code": "IDEX",
             "name": "IDEX",
             "address": "0xb705268213d593b8fd88d3fdeff93aff5cbdcfae",
-            "coingecko_id": "aurora-dao"
+            "coingecko_id": "aurora-dao",
+            "image_url": "https://assets.coingecko.com/coins/images/2565/small/49046004.png?1557813562"
         },
-        { "id": "231", "code": "-", "name": "Lightning Network", "address": "-", "coingecko_id": "" },
+        {
+            "id": "231",
+            "code": "-",
+            "name": "Lightning Network",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/7S25hk9V_400x400.png"
+        },
         {
             "id": "232",
             "code": "MCB",
             "name": "MCDEX",
             "address": "0x4e352cf164e64adcbad318c3a1e222e9eba4ce42",
-            "coingecko_id": "mcdex"
+            "coingecko_id": "mcdex",
+            "image_url": "https://assets.coingecko.com/coins/images/11796/small/mcb.png?1594355515"
         },
         {
             "id": "233",
             "code": "MET",
             "name": "Metronome ",
             "address": "0xa3d58c4e56fedcae3a7c43a725aee9a71f0ece4e",
-            "coingecko_id": "metronome"
+            "coingecko_id": "metronome",
+            "image_url": "https://assets.coingecko.com/coins/images/3249/small/metronome.png?1548084800"
         },
-        { "id": "234", "code": "-", "name": "Notional", "address": "-", "coingecko_id": "" },
+        {
+            "id": "234",
+            "code": "-",
+            "name": "Notional",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/zk8nf4kv_400x400.jpg"
+        },
         {
             "id": "235",
             "code": "PEAK",
             "name": "PEAKDEFI",
             "address": "0x630d98424efe0ea27fb1b3ab7741907dffeaad78",
-            "coingecko_id": "marketpeak"
+            "coingecko_id": "marketpeak",
+            "image_url": "https://assets.coingecko.com/coins/images/9626/small/PEAKDEFI_Logo_250x250.png?1603094772"
         },
         {
             "id": "236",
             "code": "PERL",
             "name": "Perlin ",
             "address": "0xeca82185adce47f39c684352b0439f030f860318",
-            "coingecko_id": "perlin"
+            "coingecko_id": "perlin",
+            "image_url": "https://assets.coingecko.com/coins/images/4682/small/PerlinX-Icon-1500px.png?1598633609"
         },
         {
             "id": "237",
             "code": "SXP",
             "name": "Swipe",
             "address": "0x8ce9137d39326ad0cd6491fb5cc0cba0e089b6a9",
-            "coingecko_id": "swipe"
+            "coingecko_id": "swipe",
+            "image_url": "https://assets.coingecko.com/coins/images/9368/small/swipe.png?1566792311"
         },
         {
             "id": "238",
             "code": "EPS",
             "name": "Ellipsis Finance",
             "address": "0xa7f552078dcc247c2684336020c03648500c6d9f",
-            "coingecko_id": "ellipsis"
+            "coingecko_id": "ellipsis",
+            "image_url": "https://icons.llama.fi/TAnJJCcT_400x400.jpg"
         },
         {
             "id": "239",
             "code": "POOL",
             "name": "PoolTogether",
             "address": "0x0cec1a9154ff802e7934fc916ed7ca50bde6844e",
-            "coingecko_id": "pooltogether"
+            "coingecko_id": "pooltogether",
+            "image_url": "https://assets.coingecko.com/coins/images/14003/small/PoolTogether.png?1613585632"
         },
         {
             "id": "240",
             "code": "MATIC",
             "name": "Polygon",
             "address": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
-            "coingecko_id": "matic-network"
+            "coingecko_id": "matic-network",
+            "image_url": "https://assets.coingecko.com/coins/images/4713/small/matic___polygon.jpg?1612939050"
         },
         {
             "id": "241",
             "code": "CVP",
             "name": "PowerPool",
             "address": "0x38e4adb44ef08f22f5b5b76a8f0c2d0dcbe7dca1",
-            "coingecko_id": "power-index-pool-token"
+            "coingecko_id": "power-index-pool-token",
+            "image_url": "https://assets.coingecko.com/coins/images/13281/small/pipt_logo.jpg?1606910642"
         },
         {
             "id": "242",
             "code": "NRG",
             "name": "Energiswap",
             "address": "0x1416946162b1c2c871a73b07e932d2fb6c932069",
-            "coingecko_id": "energi"
+            "coingecko_id": "energi",
+            "image_url": "https://assets.coingecko.com/coins/images/5795/small/3218.png?1604798557"
         },
         {
             "id": "243",
             "code": "FLAG",
             "name": "Flamincome",
             "address": "0x57dd84042ec9507963016596a34edad42f7e4cce ",
-            "coingecko_id": ""
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/DSoLq_x5_400x400.png"
         },
         {
             "id": "244",
             "code": "WPC",
             "name": "WePiggy",
             "address": "0x4c78015679fabe22f6e02ce8102afbf7d93794ea",
-            "coingecko_id": ""
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/AAH4Qi9v_400x400.jpg"
         },
-        { "id": "245", "code": "SCRT", "name": "Secret Network", "address": "-", "coingecko_id": "secret" },
+        {
+            "id": "245",
+            "code": "SCRT",
+            "name": "Secret Network",
+            "address": "-",
+            "coingecko_id": "secret",
+            "image_url": "https://assets.coingecko.com/coins/images/11871/small/Secret.png?1595520186"
+        },
         {
             "id": "246",
             "code": "PNG",
             "name": "Pangolin",
             "address": "0x60781c2586d68229fde47564546784ab3faca982 ",
-            "coingecko_id": "pangolin"
+            "coingecko_id": "pangolin",
+            "image_url": "https://assets.coingecko.com/coins/images/14023/small/pangolin.jpg?1613743598"
         },
         {
             "id": "247",
             "code": "JRT",
             "name": "Jarvis Network",
             "address": "0x8a9c67fee641579deba04928c4bc45f66e26343a ",
-            "coingecko_id": "jarvis-reward-token"
+            "coingecko_id": "jarvis-reward-token",
+            "image_url": "https://assets.coingecko.com/coins/images/10390/small/cfeii0y.png?1578868949"
         },
-        { "id": "248", "code": "-", "name": "ForceDAO ", "address": "-", "coingecko_id": "force-dao" },
+        {
+            "id": "248",
+            "code": "-",
+            "name": "ForceDAO ",
+            "address": "-",
+            "coingecko_id": "force-dao",
+            "image_url": "https://icons.llama.fi/Z9CnMRH0_400x400.png"
+        },
         {
             "id": "249",
             "code": "SDT",
             "name": "StakeDAO",
             "address": "0x73968b9a57c6e53d41345fd57a6e6ae27d6cdb2f",
-            "coingecko_id": "stake-dao"
+            "coingecko_id": "stake-dao",
+            "image_url": "https://assets.coingecko.com/coins/images/13724/small/stakedao_logo.jpg?1611195011"
         },
         {
             "id": "250",
             "code": "BASK",
             "name": "BasketDAO",
             "address": "0x44564d0bd94343f72e3c8a0d22308b7fa71db0bb",
-            "coingecko_id": "basketdao"
+            "coingecko_id": "basketdao",
+            "image_url": "https://assets.coingecko.com/coins/images/14636/small/BASK_200_CIRCLE.png?1617494952"
         },
         {
             "id": "251",
             "code": "MIMO",
             "name": "Mimo Defi",
             "address": "0x90b831fa3bebf58e9744a14d638e25b4ee06f9bc",
-            "coingecko_id": ""
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/6bJIKvBC_400x400.jpg"
         },
-        { "id": "252", "code": "-", "name": "Secret Bridge", "address": "-", "coingecko_id": "" },
+        {
+            "id": "252",
+            "code": "-",
+            "name": "Secret Bridge",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/TGwlZlS__400x400.jpg"
+        },
         {
             "id": "253",
             "code": "BiFi",
             "name": "BiFi",
             "address": "0x2791bfd60d232150bff86b39b7146c0eaaa2ba81",
-            "coingecko_id": "bifi"
+            "coingecko_id": "bifi",
+            "image_url": "https://assets.coingecko.com/coins/images/13671/small/ysYIu7Q.png?1610679337"
         },
         {
             "id": "254",
             "code": "BUNNY",
             "name": "Bunny",
             "address": "bsc:0xc9849e6fdb743d08faee3e34dd2d1bc69ea11a51",
-            "coingecko_id": "pancake-bunny"
+            "coingecko_id": "pancake-bunny",
+            "image_url": "https://assets.coingecko.com/coins/images/13148/small/kZwE0Xor_400x400.jpg?1605682082"
         },
         {
             "id": "255",
             "code": "FEI",
             "name": "Fei Protocol",
             "address": "0x956f47f50a910163d8bf957cf5846d573e7f87ca",
-            "coingecko_id": "fei-protocol"
+            "coingecko_id": "fei-protocol",
+            "image_url": "https://assets.coingecko.com/coins/images/14570/small/ZqsF51Re_400x400.png?1617082206"
         },
         {
             "id": "256",
             "code": "INX",
             "name": "Allinx",
             "address": "0xd60d91eae3e0f46098789fb593c06003253e5d0a",
-            "coingecko_id": ""
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/acV_M4Uj_400x400.png"
         },
         {
             "id": "257",
             "code": "XDEX",
             "name": "XDeFi",
             "address": "0x000000000000d0151e748d25b766e77efe2a6c83",
-            "coingecko_id": "xdefi-governance-token"
+            "coingecko_id": "xdefi-governance-token",
+            "image_url": "https://assets.coingecko.com/coins/images/14485/small/logo.png?1616472896"
         },
         {
             "id": "258",
             "code": "WASABI",
             "name": "Wasabix",
             "address": "0x896e145568624a498c5a909187363ae947631503",
-            "coingecko_id": "wasabix"
+            "coingecko_id": "wasabix",
+            "image_url": "https://assets.coingecko.com/coins/images/14522/small/WASABI.299ec8f7.png?1616721315"
         },
         {
             "id": "259",
             "code": "SNOB",
             "name": "Snowball",
             "address": "0xc38f41a296a4493ff429f1238e030924a1542e50",
-            "coingecko_id": "snowball-token"
+            "coingecko_id": "snowball-token",
+            "image_url": "https://assets.coingecko.com/coins/images/14347/small/snowball.png?1615879335"
         },
         {
             "id": "260",
             "code": "MIR",
             "name": "Mirror",
             "address": "0x09a3ecafa817268f77be1283176b946c4ff2e608",
-            "coingecko_id": "mirror-protocol"
+            "coingecko_id": "mirror-protocol",
+            "image_url": "https://assets.coingecko.com/coins/images/13295/small/mirror_logo_transparent.png?1611554658"
         },
         {
             "id": "261",
             "code": "MUST",
             "name": "Cometh",
             "address": "0x9c78ee466d6cb57a4d01fd887d2b5dfb2d46288f",
-            "coingecko_id": "must"
+            "coingecko_id": "must",
+            "image_url": "https://assets.coingecko.com/coins/images/13688/small/must_logo.png?1610949645"
         },
-        { "id": "262", "code": "-", "name": "Primitive", "address": "-", "coingecko_id": "" },
+        {
+            "id": "262",
+            "code": "-",
+            "name": "Primitive",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/wI1dMwfl_400x400.jpg"
+        },
         {
             "id": "263",
             "code": "KUN",
             "name": "QIAN",
             "address": "0x65d9bc970aa9b2413027fa339f7f179b3f3f2604",
-            "coingecko_id": "qian-governance-token"
+            "coingecko_id": "qian-governance-token",
+            "image_url": "https://assets.coingecko.com/coins/images/13177/small/kun_logo.png?1605923919"
         },
-        { "id": "264", "code": "-", "name": "Robo-Advisor for Yield", "address": "-", "coingecko_id": "" },
+        {
+            "id": "264",
+            "code": "-",
+            "name": "Robo-Advisor for Yield",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/FnTG3PiJ_400x400.jpg"
+        },
         {
             "id": "265",
             "code": "RAI",
             "name": "Reflexer",
             "address": "0x03ab458634910aad20ef5f1c8ee96f1d6ac54919",
-            "coingecko_id": "rai"
+            "coingecko_id": "rai",
+            "image_url": "https://assets.coingecko.com/coins/images/14004/small/RAI-logo-coin.png?1613592334"
         },
-        { "id": "266", "code": "-", "name": "Set Protocol", "address": "-", "coingecko_id": "" },
+        {
+            "id": "266",
+            "code": "-",
+            "name": "Set Protocol",
+            "address": "-",
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/0QBKGMsU_400x400.png"
+        },
         {
             "id": "267",
             "code": "SFG",
             "name": "S Finance",
             "address": "0x8a6aca71a218301c7081d4e96d64292d3b275ce0",
-            "coingecko_id": "s-finance"
+            "coingecko_id": "s-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/12605/small/Z7D8B4b.png?1605346184"
         },
         {
             "id": "268",
             "code": "TRADE",
             "name": "UniTrade",
             "address": "0x6f87d756daf0503d08eb8993686c7fc01dc44fb1",
-            "coingecko_id": "unitrade"
+            "coingecko_id": "unitrade",
+            "image_url": "https://assets.coingecko.com/coins/images/11982/small/unitrade.PNG?1597009487"
         },
         {
             "id": "269",
             "code": "YFII",
             "name": "YFII",
             "address": "0xa1d0e215a23d7030842fc67ce582a6afa3ccab83",
-            "coingecko_id": "yfii-finance"
+            "coingecko_id": "yfii-finance",
+            "image_url": "https://assets.coingecko.com/coins/images/11902/small/YFII-logo.78631676.png?1598677348"
         },
         {
             "id": "270",
             "code": "LQTY",
             "name": "Liquity",
             "address": "0x6dea81c8171d0ba574754ef6f8b412f2ed88c54d",
-            "coingecko_id": "liquity"
+            "coingecko_id": "liquity",
+            "image_url": "https://assets.coingecko.com/coins/images/14665/small/200-lqty-icon.png?1617631180"
         },
         {
             "id": "271",
             "code": "HNY",
             "name": "Honeyswap",
             "address": "xdai:0x71850b7e9ee3f13ab46d67167341e4bdc905eef9",
-            "coingecko_id": "honeyswap"
-            },
+            "coingecko_id": "honeyswap",
+            "image_url": "https://assets.coingecko.com/coins/images/12895/small/hnys.png?1614100588"
+        },
         {
             "id": "272",
             "code": "CTX",
             "name": "Cryptex",
             "address": "0x321C2fE4446C7c963dc41Dd58879AF648838f98D",
-            "coingecko_id": ""
+            "coingecko_id": "",
+            "image_url": "https://icons.llama.fi/Wq5gUhFN_400x400.jpg"
         },
         {
             "id": "273",
             "code": "AC",
             "name": "ACoconut",
             "address": "0x9a0aba393aac4dfbff4333b06c407458002c6183",
-            "coingecko_id": "acoconut"
+            "coingecko_id": "acoconut",
+            "image_url": "https://assets.coingecko.com/coins/images/12779/small/ac_logo.png?1602500084"
+        },
+        {
+            "id": "274",
+            "code": "OLIVE",
+            "name": "Olive Cash",
+            "address": "avax:0x617724974218a18769020a70162165a539c07e8a",
+            "image_url": "https://icons.llama.fi/olive256.png",
+            "coingecko_id": ""
+        },
+        {
+            "id": "275",
+            "code": "SGT",
+            "name": "SharedStake",
+            "address": "0x84810bcf08744d5862b8181f12d17bfd57d3b078",
+            "image_url": "https://assets.coingecko.com/coins/images/13948/small/sgt-png.png?1615189100",
+            "coingecko_id": "sharedstake-governance-token"
+        },
+        {
+            "id": "276",
+            "code": "FIS",
+            "name": "Stafi",
+            "address": "0xef3a930e1ffffacd2fc13434ac81bd278b0ecc8d",
+            "image_url": "https://assets.coingecko.com/coins/images/12423/small/stafi_logo.jpg?1599730991",
+            "coingecko_id": "stafi"
+        },
+        {
+            "id": "277",
+            "code": "-",
+            "name": "Stakewise",
+            "address": "-",
+            "image_url": "https://icons.llama.fi/stakewise.png",
+            "coingecko_id": ""
+        },
+        {
+            "id": "278",
+            "code": "ANKR",
+            "name": "Ankr",
+            "address": "0x8290333cef9e6d528dd5618fb97a76f268f3edd4",
+            "image_url": "https://assets.coingecko.com/coins/images/4324/small/U85xTl2.png?1608111978",
+            "coingecko_id": "ankr"
+        },
+        {
+            "id": "279",
+            "code": "STETH",
+            "name": "StakeHound",
+            "address": "-",
+            "image_url": "https://icons.llama.fi/stakehound.png",
+            "coingecko_id": "stakehound-staked-ether"
+        },
+        {
+            "id": "280",
+            "code": "OXY",
+            "name": "Oxygen",
+            "address": "0x965697b4ef02f0de01384d0d4f9f782b1670c163",
+            "image_url": "https://assets.coingecko.com/coins/images/13509/small/8DjBZ79V_400x400.jpg?1609236331",
+            "coingecko_id": "oxygen"
+        },
+        {
+            "id": "281",
+            "code": "-",
+            "name": "Ribbon Finance",
+            "address": "-",
+            "image_url": "https://icons.llama.fi/ribbon.png",
+            "coingecko_id": ""
+        },
+        {
+            "id": "282",
+            "code": "YAM",
+            "name": "Yam Finance",
+            "address": "0x0aacfbec6a24756c20d41914f2caba817c0d8521",
+            "image_url": "https://assets.coingecko.com/coins/images/12530/small/YAM-icon.png?1600495536",
+            "coingecko_id": "yam-2"
+        },
+        {
+            "id": "283",
+            "code": "-",
+            "name": "Orca",
+            "address": "-",
+            "image_url": "https://icons.llama.fi/orca.jpg",
+            "coingecko_id": ""
+        },
+        {
+            "id": "284",
+            "code": "SRM",
+            "name": "Serum Swap",
+            "address": "",
+            "image_url": "https://icons.llama.fi/serum-amm.svg",
+            "coingecko_id": "serum"
+        },
+        {
+            "id": "285",
+            "code": "-",
+            "name": "Opyn",
+            "address": "",
+            "image_url": "https://icons.llama.fi/opyn.png",
+            "coingecko_id": ""
+        },
+        {
+            "id": "286",
+            "code": "MNGO",
+            "name": "Mango Markets",
+            "address": "-",
+            "image_url": "https://icons.llama.fi/mango.jpg",
+            "coingecko_id": "mango-markets"
+        },
+        {
+            "id": "287",
+            "code": "ZERO",
+            "name": "0.exchange",
+            "address": "0xf0939011a9bb95c3b791f0cb546377ed2693a574",
+            "image_url": "https://assets.coingecko.com/coins/images/13706/small/0.exchange_%28logo%29.jpg?1617070530",
+            "coingecko_id": "zero-exchange"
+        },
+        {
+            "id": "288",
+            "code": "PROS",
+            "name": "Prosper",
+            "address": "0x8642a849d0dcb7a15a974794668adcfbe4794b56",
+            "image_url": "https://assets.coingecko.com/coins/images/13668/small/heD6cg22l3sF5VgPh4G1xC6lnKEWXJif-jbaqUpv8CDP6jbWaqn9UjBdkXWNrw1CewaQOxb8zXRdNeNJWWiUDjfsEl_d7E3bPLg4cFoilQF5TGKHfWyJlnpm3UYc9ytvRvOjxOevMuiu8-lusnNoOcwgsJpMkYWHqe322GAxLt0_30kFMVAcjEDUrOlkK6hUYi0m9P433mvNlOm.jpg?1610671732",
+            "coingecko_id": "prosper"
+        },
+        {
+            "id": "289",
+            "code": "YTS",
+            "name": "YetiSwap",
+            "address": "avax:0x488f73cddda1de3664775ffd91623637383d6404",
+            "image_url": "https://assets.coingecko.com/coins/images/14382/small/YTSCoin.png?1615786247",
+            "coingecko_id": "yetiswap"
+        },
+        {
+            "id": "290",
+            "code": "PEFI",
+            "name": "Penguin Finance",
+            "address": "avax:0xe896cdeaac9615145c0ca09c8cd5c25bced6384c",
+            "image_url": "https://assets.coingecko.com/coins/images/14643/small/TcxLiQr.png?1617486828",
+            "coingecko_id": "penguin-finance"
+        },
+        {
+            "id": "291",
+            "code": "-",
+            "name": "Integral",
+            "address": "",
+            "image_url": "https://icons.llama.fi/integral.jpg",
+            "coingecko_id": ""
         }
     ]
 }

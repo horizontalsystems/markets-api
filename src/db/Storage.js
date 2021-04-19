@@ -83,7 +83,7 @@ export default {
 
   updateCoinInfos(coinInfos) {
     return CoinInfo.bulkCreate(coinInfos, {
-      updateOnDuplicate: ['name', 'code', 'defillamaId', 'coinGeckoId', 'status']
+      updateOnDuplicate: ['name', 'code', 'defillamaId', 'coinGeckoId', 'status', 'imageUrl']
     })
   },
 

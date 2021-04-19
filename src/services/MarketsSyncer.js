@@ -31,18 +31,20 @@ class MarketsSyncer {
   syncGlobalMarkets(now) {
     this.marketInfoProvider.getGlobalMarkets(now).then(data => {
       Storage.saveGlobalMarkets(data)
-    }).catch(e => logger.error(e.stack));
+    }).catch(e => logger.error(e));
   }
 
   async syncDefiMarkets(now) {
     this.marketInfoProvider.getDefiMarkets(now).then(data => {
       Storage.saveCoinInfoDetails(data)
-    }).catch(e => logger.error(e.stack));
+    }).catch(e => logger.error(e));
   }
 
   async syncXRates(now) {
     this.marketInfoProvider.getCurrencyXRates(this.baseCurrencyCode, this.currencyCodes, now).then(data => {
-      Storage.saveXRates(data)
+      Storage.saveXRates(data).catch(
+        e => logger.error(`Error saving xrates: ${e}`)
+      );
     }).catch(e => logger.error(e.stack));
   }
 }

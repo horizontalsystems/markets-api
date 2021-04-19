@@ -126,6 +126,7 @@ class MarketsService {
               coingecko_id: result.coingecko_id,
               name: result.name,
               code: result.code,
+              image_url: result.imageUrl,
               tvl: result.tvl * usdXRate,
               tvl_diff_24h: result.tvl_diff
             }))
