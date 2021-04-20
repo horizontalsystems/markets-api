@@ -3,10 +3,15 @@ import axios from 'axios'
 class CoingeckoProvider {
   constructor() {
     this.baseUrl = 'https://api.coingecko.com/api/v3'
+    this.Responsetimeout = 180000
+    axios.defaults.timeout = 180000;
   }
 
   async getGlobalDefiMarkets() {
-    const { data: resp } = await axios.get(`${this.baseUrl}/global/decentralized_finance_defi`)
+    const { data: resp } = await axios.get(
+      `${this.baseUrl}/global/decentralized_finance_defi`,
+      { timeout: this.Responsetimeout }
+    )
 
     return {
       marketCapDefi: resp.data.defi_market_cap,
@@ -16,13 +21,16 @@ class CoingeckoProvider {
 
   async getXRates(coins, fiats) {
     const params = `ids=${coins}&vs_currencies=${fiats}&include_market_cap=false`
-    const { data: resp } = await axios.get(`${this.baseUrl}/simple/price?${params}`)
+    const { data: resp } = await axios.get(
+      `${this.baseUrl}/simple/price?${params}`,
+      { timeout: this.Responsetimeout }
+    )
 
     return resp
   }
 
   async getGlobalMarkets() {
-    const { data: resp } = await axios.get(`${this.baseUrl}/global`)
+    const { data: resp } = await axios.get(`${this.baseUrl}/global`, { timeout: this.Responsetimeout })
 
     return {
       marketCap: resp.data.total_market_cap.usd,
