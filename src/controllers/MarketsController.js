@@ -26,7 +26,17 @@ class MarketsController {
   }
 
   getDefiMarkets(req, res) {
-    this.marketService.getDefiMarkets(req.query.currency_code)
+    this.marketService.getDefiMarkets(req.query.currency_code, req.query.diff_period)
+      .then(result => {
+        res.status(200).json(result)
+      })
+      .catch(error => {
+        res.status(500).send(error)
+      })
+  }
+
+  getCoinDefiMarkets(req, res) {
+    this.marketService.getCoinDefiMarkets(req.params.coinGeckoId, req.query.currency_code, req.params.period)
       .then(result => {
         res.status(200).json(result)
       })
