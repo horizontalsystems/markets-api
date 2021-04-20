@@ -83,13 +83,13 @@ export default {
 
   updateCoinInfos(coinInfos) {
     return CoinInfo.bulkCreate(coinInfos, {
-      updateOnDuplicate: ['name', 'code', 'defillamaId', 'coinGeckoId', 'status', 'imageUrl']
+      updateOnDuplicate: ['name', 'code', 'defillamaId', 'chains', 'coinGeckoId', 'status', 'imageUrl']
     })
   },
 
   async getDefiMarkets(fromTimestamp) {
     const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id,
-                    tbc.coingecko_id, tbc.code, tbc.name, tbc.image_url, tb1.tvl, tb1.timestamp,
+                    tbc.coingecko_id, tbc.code, tbc.name, tbc.chains, tbc.image_url, tb1.tvl, tb1.timestamp,
                     CASE WHEN tb2.tvl <=0 THEN 0
                      ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
                     END AS tvl_diff
@@ -106,5 +106,40 @@ export default {
     });
 
     return defiMarkets
+  },
+
+  async getDefiMarketsByCoin(coinGeckoId, fromTimestamp) {
+    const sql = `SELECT *
+                 from tb_coin_info tbc, tb_defi_markets tbm
+                 WHERE tbm.coin_id = tbc.id and tbm.timestamp>=:fromTimestamp and tbc.coingecko_id=:coinGeckoId
+                 ORDER BY tbm.timestamp DESC`
+
+    const defiMarkets = await models.sequelize.query(sql, {
+      replacements: { fromTimestamp, coinGeckoId },
+      type: Sequelize.QueryTypes.SELECT
+    });
+
+    return defiMarkets
+  },
+
+  async getDefiMarketsDiff(fromTimestamp) {
+    const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id,
+                    tb1.timestamp,
+                    CASE WHEN tb2.tvl <=0 THEN 0
+                     ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
+                    END AS tvl_diff
+                 FROM tb_defi_markets tb1,
+                      (SELECT DISTINCT ON (coin_id) coin_id,tvl, timestamp FROM tb_defi_markets
+                       WHERE timestamp>=:fromTimestamp order by coin_id, timestamp) tb2
+                 WHERE tb2.coin_id = tb1.coin_id
+                 ORDER BY tb1.coin_id, tb1.timestamp DESC`
+
+    const defiMarkets = await models.sequelize.query(sql, {
+      replacements: { fromTimestamp },
+      type: Sequelize.QueryTypes.SELECT
+    });
+
+    return defiMarkets
   }
+
 }
