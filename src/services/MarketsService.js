@@ -164,10 +164,10 @@ class MarketsService {
     return {}
   }
 
-  async getDefiMarkets(currencyCode, diffPeriods) {
+  async getDefiMarkets(currencyCode, requestDiffPeriods) {
     try {
-      const i24h = (Math.floor(Date.now() / 1000)) - 86400
-      const results = await Storage.getDefiMarkets(i24h)
+      const diffPeriods = requestDiffPeriods || '24h'
+      const results = await Storage.getDefiMarkets()
 
       if (results) {
         if (results.length > 0) {
@@ -184,13 +184,11 @@ class MarketsService {
             code: result.code,
             chains: result.chains ? result.chains.split(',') : [],
             image_url: result.image_url,
-            tvl: result.tvl * xrate.usdXRate,
-            tvl_diff_24h: result.tvl_diff
+            tvl: result.tvl * xrate.usdXRate
           }))
 
           // -----------------------------------------------
           // Fetch diff for periods
-
           if (diffPeriods) {
             const periods = diffPeriods.split(',')
             if (periods.length > 0) {
