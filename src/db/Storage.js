@@ -87,21 +87,15 @@ export default {
     })
   },
 
-  async getDefiMarkets(fromTimestamp) {
-    const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id,
-                    tbc.coingecko_id, tbc.code, tbc.name, tbc.chains, tbc.image_url, tb1.tvl, tb1.timestamp,
-                    CASE WHEN tb2.tvl <=0 THEN 0
-                     ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
-                    END AS tvl_diff
-                 FROM tb_defi_markets tb1,
-                      tb_coin_info tbc,
-                      (SELECT DISTINCT ON (coin_id) coin_id,tvl, timestamp FROM tb_defi_markets
-                       WHERE timestamp>=:fromTimestamp order by coin_id, timestamp) tb2
-                 WHERE tb2.coin_id = tb1.coin_id and tbc.id = tb2.coin_id
-                 ORDER BY tb1.coin_id, tb1.timestamp DESC`
+  async getDefiMarkets() {
+    const sql = `SELECT DISTINCT ON (tbm.coin_id) tbm.coin_id,
+                    tbc.coingecko_id, tbc.code, tbc.name, tbc.chains, tbc.image_url, tbm.tvl, tbm.timestamp
+                 FROM tb_defi_markets tbm,
+                      tb_coin_info tbc
+                 WHERE tbc.id = tbm.coin_id
+                 ORDER BY tbm.coin_id, tbm.timestamp DESC`
 
     const defiMarkets = await models.sequelize.query(sql, {
-      replacements: { fromTimestamp },
       type: Sequelize.QueryTypes.SELECT
     });
 
