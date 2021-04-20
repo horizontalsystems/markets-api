@@ -7,6 +7,23 @@ class MarketsService {
     this.baseCurrencyCode = 'USD'
   }
 
+  async getXRate(currencyCode, timestamp) {
+    let usdXRate = 1
+    let resCurrencyCode = currencyCode
+    if (currencyCode) {
+      if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
+        const result = await Storage.getXRate(timestamp, this.baseCurrencyCode, currencyCode.toUpperCase())
+        if (result) usdXRate = result.rate
+        else return {}
+      }
+    } else resCurrencyCode = this.baseCurrencyCode
+
+    return {
+      usdXRate,
+      currencyCode: resCurrencyCode
+    }
+  }
+
   async getLatestGlobalMarkets(currencyCode) {
     try {
       const marketsData = await Storage.getGlobalMarkets((Math.floor(Date.now() / 1000)) - 86400)
@@ -15,22 +32,15 @@ class MarketsService {
         const latest = marketsData.shift()
         const data24 = marketsData.pop()
 
-        let usdXRate = 1
-        let resCurrencyCode = currencyCode
-        if (currencyCode) {
-          if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
-            const result = await Storage.getXRate(latest.timestamp, this.baseCurrencyCode, currencyCode.toUpperCase())
-            if (result) usdXRate = result.rate
-            else return {}
-          }
-        } else resCurrencyCode = this.baseCurrencyCode
+        const xrate = await this.getXRate(currencyCode, latest.timestamp)
+        if (!xrate) return {}
 
         return {
-          currency_code: resCurrencyCode,
-          market_cap: latest.marketCap * usdXRate,
-          market_cap_defi: latest.marketCapDefi * usdXRate,
-          volume24h: latest.volume24h * usdXRate,
-          tvl: latest.totalValueLocked * usdXRate,
+          currency_code: xrate.currencyCode,
+          market_cap: latest.marketCap * xrate.usdXRate,
+          market_cap_defi: latest.marketCapDefi * xrate.usdXRate,
+          volume24h: latest.volume24h * xrate.usdXRate,
+          tvl: latest.totalValueLocked * xrate.usdXRate,
           dominance_btc: latest.dominanceBTC,
           market_cap_diff_24h: ((latest.marketCap - data24.marketCap) * 100) / data24.marketCap,
           market_cap_defi_diff_24h: ((latest.marketCapDefi - data24.marketCapDefi) * 100) / data24.marketCapDefi,
@@ -54,7 +64,7 @@ class MarketsService {
       if (results) {
         const globalMarkets = []
         let usdXRates = []
-        const usdXRate = 1
+        let usdXRate = 1
         let resCurrencyCode = currencyCode
 
         if (currencyCode) {
@@ -65,7 +75,7 @@ class MarketsService {
               currencyCode.toUpperCase()
             )
 
-            if (Object.keys(usdXRates).length === 0 || Object.keys(usdXRates).length !== results.length) {
+            if (Object.keys(usdXRates).length === 0) {
               return {}
             }
           }
@@ -76,7 +86,7 @@ class MarketsService {
             const xrateResult = usdXRates.find(rate => rate.timestamp === result.timestamp)
 
             if (xrateResult) {
-              usdXRates = xrateResult.rate
+              usdXRate = xrateResult.rate
             }
           }
 
@@ -102,7 +112,59 @@ class MarketsService {
     return {}
   }
 
-  async getDefiMarkets(currencyCode) {
+  async getCoinDefiMarkets(coinGeckoId, currencyCode, period) {
+    try {
+      const rangePeriod = (Math.floor(Date.now() / 1000)) - TimePeriod.identify(period).seconds
+      const results = await Storage.getDefiMarketsByCoin(coinGeckoId, rangePeriod)
+
+      if (results) {
+        const coinDefiMarkets = []
+        let usdXRates = []
+        let usdXRate = 1
+        let resCurrencyCode = currencyCode
+
+        if (currencyCode) {
+          if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
+            usdXRates = await Storage.getXRates(
+              results.map(r => r.timestamp),
+              this.baseCurrencyCode,
+              currencyCode.toUpperCase()
+            )
+
+            if (Object.keys(usdXRates).length === 0) {
+              return {}
+            }
+          }
+        } else resCurrencyCode = this.baseCurrencyCode
+
+        results.forEach(result => {
+          if (resCurrencyCode.toUpperCase() !== this.baseCurrencyCode) {
+            const xrateResult = usdXRates.find(rate => rate.timestamp === result.timestamp)
+
+            if (xrateResult) {
+              usdXRate = xrateResult.rate
+            }
+          }
+
+          const coinDefiMarket = {
+            currency_code: resCurrencyCode,
+            timestamp: parseInt(result.timestamp, 10),
+            tvl: result.tvl * usdXRate
+          }
+
+          coinDefiMarkets.push(coinDefiMarket)
+        })
+
+        return coinDefiMarkets
+      }
+    } catch (e) {
+      logger.error(`Error getting Coin:${coinGeckoId}, DefiMarkets for period:${period} , ${e}`)
+    }
+
+    return {}
+  }
+
+  async getDefiMarkets(currencyCode, diffPeriods) {
     try {
       const i24h = (Math.floor(Date.now() / 1000)) - 86400
       const results = await Storage.getDefiMarkets(i24h)
@@ -110,27 +172,47 @@ class MarketsService {
       if (results) {
         if (results.length > 0) {
           const { timestamp } = results[0]
-          let usdXRate = 1
-          let resCurrencyCode = currencyCode
-          if (currencyCode) {
-            if (currencyCode.toUpperCase() !== this.baseCurrencyCode) {
-              const result = await Storage.getXRate(timestamp, this.baseCurrencyCode, currencyCode.toUpperCase())
-              if (result) usdXRate = result.rate
-              else return {}
-            }
-          } else resCurrencyCode = this.baseCurrencyCode
 
-          if (results.length > 0) {
-            return results.map(result => ({
-              currency_code: resCurrencyCode,
-              coingecko_id: result.coingecko_id,
-              name: result.name,
-              code: result.code,
-              image_url: result.image_url,
-              tvl: result.tvl * usdXRate,
-              tvl_diff_24h: result.tvl_diff
-            }))
+          const xrate = await this.getXRate(currencyCode, timestamp)
+          if (!xrate) return {}
+
+          const defiMarkets = results.map(result => ({
+            id: result.coin_id,
+            currency_code: xrate.currencyCode,
+            coingecko_id: result.coingecko_id,
+            name: result.name,
+            code: result.code,
+            chains: result.chains ? result.chains.split(',') : [],
+            image_url: result.image_url,
+            tvl: result.tvl * xrate.usdXRate,
+            tvl_diff_24h: result.tvl_diff
+          }))
+
+          // -----------------------------------------------
+          // Fetch diff for periods
+
+          if (diffPeriods) {
+            const periods = diffPeriods.split(',')
+            if (periods.length > 0) {
+              await Promise.all(
+                periods.map(period => {
+                  const timePeriod = TimePeriod.identify(period)
+                  const fromTimestamp = (Math.floor(Date.now() / 1000)) - timePeriod.seconds
+                  return Storage.getDefiMarketsDiff(fromTimestamp).then(diffResults => {
+                    defiMarkets.forEach(dfm => {
+                      const found = diffResults.find(dr => dr.coin_id === dfm.id)
+                      if (found) {
+                        dfm[`tvl_diff_${timePeriod.name}`] = found.tvl_diff
+                      }
+                    })
+                  })
+                })
+              )
+            }
           }
+          // -----------------------------------------------
+
+          return defiMarkets
         }
       }
     } catch (e) {

@@ -12,11 +12,11 @@ class TimePeriod {
   }
 
   static get DAY_14() {
-    return { name: '1h', seconds: 1209600 };
+    return { name: '14d', seconds: 1209600 };
   }
 
   static get DAY_30() {
-    return { name: '1h', seconds: 2592000 };
+    return { name: '30d', seconds: 2592000 };
   }
 
   static identify(period) {
