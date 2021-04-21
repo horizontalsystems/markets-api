@@ -4,6 +4,7 @@ class MarketInfoProvider {
   constructor(coingeckoProvider, defiLlamaProvider) {
     this.coingeckoProvider = coingeckoProvider
     this.defiLlamaProvider = defiLlamaProvider
+    this.latestTvl = 0
   }
 
   async getGlobalMarkets(timestamp) {
@@ -15,7 +16,10 @@ class MarketInfoProvider {
 
       globalData.timestamp = timestamp
       globalData.marketCapDefi = globalDefiData.marketCapDefi
-      globalData.totalValueLocked = defiLlamaData.totalValueLocked
+      if (defiLlamaData.totalValueLocked > 0) {
+        globalData.totalValueLocked = defiLlamaData.totalValueLocked
+        this.latestTvl = defiLlamaData.totalValueLocked
+      } else globalData.totalValueLocked = this.latestTvl
 
       return globalData
     }
