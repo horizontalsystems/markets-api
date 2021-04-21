@@ -19,7 +19,9 @@ class MarketInfoProvider {
       if (defiLlamaData.totalValueLocked > 0) {
         globalData.totalValueLocked = defiLlamaData.totalValueLocked
         this.latestTvl = defiLlamaData.totalValueLocked
-      } else globalData.totalValueLocked = this.latestTvl
+      } else {
+        globalData.totalValueLocked = this.latestTvl
+      }
 
       return globalData
     }
