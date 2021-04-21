@@ -112,6 +112,32 @@ class MarketsService {
     return {}
   }
 
+  async getLatestCoinDefiMarkets(coinGeckoId, currencyCode) {
+    try {
+      const defiMarket = await Storage.getLatestCoinDefiMarkets(coinGeckoId)
+
+      if (defiMarket) {
+        const xrate = await this.getXRate(currencyCode, defiMarket.timestamp)
+        if (!xrate) return {}
+
+        return {
+          currency_code: xrate.currencyCode,
+          coingecko_id: defiMarket.coinInfo.coinGeckoId,
+          name: defiMarket.coinInfo.name,
+          code: defiMarket.coinInfo.code,
+          chains: defiMarket.coinInfo.chains ? defiMarket.coinInfo.chains.split(',') : [],
+          image_url: defiMarket.coinInfo.imageUrl,
+          timestamp: parseInt(defiMarket.timestamp, 10),
+          tvl: defiMarket.totalValueLocked * xrate.usdXRate
+        }
+      }
+    } catch (e) {
+      logger.error(`Error getting latest CoinDefiMarkets ${e}`)
+    }
+
+    return {}
+  }
+
   async getCoinDefiMarkets(coinGeckoId, currencyCode, period) {
     try {
       const rangePeriod = (Math.floor(Date.now() / 1000)) - TimePeriod.identify(period).seconds

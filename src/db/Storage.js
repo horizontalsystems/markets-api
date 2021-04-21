@@ -4,6 +4,7 @@ import GlobalMarkets from '../models/GlobalMarkets'
 import CoinInfo from '../models/CoinInfo'
 import ResourceInfo from '../models/ResourceInfo'
 import XRate from '../models/XRate'
+import DefiMarkets from '../models/DefiMarkets'
 
 export default {
   saveXRates(rates) {
@@ -114,6 +115,20 @@ export default {
     });
 
     return defiMarkets
+  },
+
+  getLatestCoinDefiMarkets(coinGeckoId) {
+    return DefiMarkets.findOne({
+      attributes: ['timestamp', 'totalValueLocked'],
+      order: [
+        ['timestamp', 'DESC']
+      ],
+      include: [{
+        model: CoinInfo,
+        as: 'coinInfo',
+        where: { coinGeckoId }
+      }]
+    })
   },
 
   async getDefiMarketsDiff(fromTimestamp) {

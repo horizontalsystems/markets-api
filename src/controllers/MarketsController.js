@@ -44,6 +44,16 @@ class MarketsController {
         res.status(500).send(error)
       })
   }
+
+  getLatestCoinDefiMarkets(req, res) {
+    this.marketService.getLatestCoinDefiMarkets(req.params.coinGeckoId, req.query.currency_code)
+      .then(result => {
+        res.status(200).json(result)
+      })
+      .catch(error => {
+        res.status(500).send(error)
+      })
+  }
 }
 
 export default MarketsController
