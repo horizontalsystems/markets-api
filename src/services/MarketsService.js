@@ -29,8 +29,8 @@ class MarketsService {
       const marketsData = await Storage.getGlobalMarkets((Math.floor(Date.now() / 1000)) - 86400)
 
       if (marketsData && marketsData.length > 0) {
-        const latest = marketsData.shift()
-        const data24 = marketsData.pop()
+        const latest = marketsData.pop()
+        const data24 = marketsData.shift()
 
         const xrate = await this.getXRate(currencyCode, latest.timestamp)
         if (!xrate) return {}
