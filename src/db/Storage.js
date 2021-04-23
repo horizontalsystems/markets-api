@@ -51,7 +51,7 @@ export default {
 
   getGlobalMarkets(fromTimestamp) {
     return GlobalMarkets.findAll({
-      order: [['timestamp', 'DESC']],
+      order: [['timestamp', 'ASC']],
       where: {
         timestamp: {
           [Sequelize.Op.gte]: fromTimestamp
@@ -107,7 +107,7 @@ export default {
     const sql = `SELECT *
                  from tb_coin_info tbc, tb_defi_markets tbm
                  WHERE tbm.coin_id = tbc.id and tbm.timestamp>=:fromTimestamp and tbc.coingecko_id=:coinGeckoId
-                 ORDER BY tbm.timestamp DESC`
+                 ORDER BY tbm.timestamp ASC`
 
     const defiMarkets = await models.sequelize.query(sql, {
       replacements: { fromTimestamp, coinGeckoId },
