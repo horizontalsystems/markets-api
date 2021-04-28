@@ -114,21 +114,23 @@ class MarketsService {
 
   async getLatestCoinDefiMarkets(coinGeckoId, currencyCode) {
     try {
-      const defiMarket = await Storage.getLatestCoinDefiMarkets(coinGeckoId)
+      const defiMarkets = await Storage.getLatestCoinDefiMarkets(coinGeckoId)
 
-      if (defiMarket) {
+      if (defiMarkets.length > 0) {
+        const defiMarket = defiMarkets[0]
         const xrate = await this.getXRate(currencyCode, defiMarket.timestamp)
         if (!xrate) return {}
 
         return {
           currency_code: xrate.currencyCode,
-          coingecko_id: defiMarket.coinInfo.coinGeckoId,
-          name: defiMarket.coinInfo.name,
-          code: defiMarket.coinInfo.code,
-          chains: defiMarket.coinInfo.chains ? defiMarket.coinInfo.chains.split(',') : [],
-          image_url: defiMarket.coinInfo.imageUrl,
+          coingecko_id: defiMarket.coingecko_id,
+          name: defiMarket.name,
+          code: defiMarket.code,
+          chains: defiMarket.chains ? defiMarket.chains.split(',') : [],
+          image_url: defiMarket.image_url,
           timestamp: parseInt(defiMarket.timestamp, 10),
-          tvl: defiMarket.totalValueLocked * xrate.usdXRate
+          tvl: defiMarket.tvl * xrate.usdXRate,
+          tvl_rank: parseInt(defiMarket.position, 10)
         }
       }
     } catch (e) {

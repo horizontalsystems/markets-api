@@ -4,7 +4,6 @@ import GlobalMarkets from '../models/GlobalMarkets'
 import CoinInfo from '../models/CoinInfo'
 import ResourceInfo from '../models/ResourceInfo'
 import XRate from '../models/XRate'
-import DefiMarkets from '../models/DefiMarkets'
 
 export default {
   saveXRates(rates) {
@@ -117,18 +116,23 @@ export default {
     return defiMarkets
   },
 
-  getLatestCoinDefiMarkets(coinGeckoId) {
-    return DefiMarkets.findOne({
-      attributes: ['timestamp', 'totalValueLocked'],
-      order: [
-        ['timestamp', 'DESC']
-      ],
-      include: [{
-        model: CoinInfo,
-        as: 'coinInfo',
-        where: { coinGeckoId }
-      }]
-    })
+  async getLatestCoinDefiMarkets(coinGeckoId) {
+    const sql = `SELECT *
+                 FROM  (SELECT *, row_number() over(order by tbf.tvl DESC) as position
+                      FROM  ( SELECT DISTINCT ON (tbc.id) tbc.id, tbc.code,tbc.*, tbf.*
+                              FROM tb_coin_info tbc, tb_defi_markets tbf
+                              WHERE tbf.coin_id = tbc.id
+                              ORDER BY tbc.id, tbf.timestamp DESC
+                            ) AS tbf
+                      ) AS tbf
+                 WHERE coingecko_id=:coinGeckoId`
+
+    const coinDefiMarkets = await models.sequelize.query(sql, {
+      replacements: { coinGeckoId },
+      type: Sequelize.QueryTypes.SELECT
+    });
+
+    return coinDefiMarkets
   },
 
   async getDefiMarketsDiff(fromTimestamp) {
