@@ -7,6 +7,26 @@ class MarketsService {
     this.baseCurrencyCode = 'USD'
   }
 
+  reduceElements(elements, period) {
+    if (period.range === 0) {
+      return elements
+    }
+
+    const reduced = []
+    const lastElement = elements.pop()
+    let lastTimestamp = 0
+
+    elements.forEach(element => {
+      if (element.timestamp >= lastTimestamp) {
+        reduced.push(element)
+        lastTimestamp = element.timestamp + period.range
+      }
+    })
+
+    reduced.push(lastElement)
+    return reduced
+  }
+
   async getXRate(currencyCode, timestamp) {
     let usdXRate = 1
     let resCurrencyCode = currencyCode
@@ -103,7 +123,7 @@ class MarketsService {
           globalMarkets.push(globalMarket)
         })
 
-        return globalMarkets
+        return this.reduceElements(globalMarkets, TimePeriod.identify(period))
       }
     } catch (e) {
       logger.error(`Error getting GlobalMarkets for period:${period} , ${e}`)
@@ -183,7 +203,7 @@ class MarketsService {
           coinDefiMarkets.push(coinDefiMarket)
         })
 
-        return coinDefiMarkets
+        return this.reduceElements(coinDefiMarkets, TimePeriod.identify(period))
       }
     } catch (e) {
       logger.error(`Error getting Coin:${coinGeckoId}, DefiMarkets for period:${period} , ${e}`)
