@@ -1,5 +1,5 @@
 {
-    "version": 6,
+    "version": 7,
     "supported_currencies": [
         { "code": "USD", "name": "US Dollar" },
         { "code": "EUR", "name": "Euro" },
@@ -1637,6 +1637,87 @@
             "image_url": "https://icons.llama.fi/swapr.svg",
             "chains": ["Ethereum", "xDai"],
             "coingecko_id": ""
+        },
+        {
+            "id": "293",
+            "code": "-",
+            "name": "Lydia",
+            "address": "",
+            "image_url": "https://icons.llama.fi/lydia.jpg",
+            "coingecko_id": "",
+            "chains": ["Avalanche"]
+        },
+        {
+            "id": "294",
+            "code": "ANC",
+            "name": "Anchor",
+            "address": null,
+            "image_url": "https://icons.llama.fi/anchor.jpg",
+            "coingecko_id": "anchor-protocol",
+            "chains": ["Terra"]
+        },
+        {
+            "id": "295",
+            "code": "STX",
+            "name": "Stacks",
+            "address": null,
+            "image_url": "https://icons.llama.fi/stacks.png",
+            "coingecko_id": "blockstack",
+            "chains": ["Stacks"]
+        },
+        {
+            "id": "296",
+            "code": "ZOO",
+            "name": "Zookeeper",
+            "address": "0x6e11655d6ab3781c6613db8cb1bc3dee9a7e111f",
+            "image_url": "https://icons.llama.fi/zookeeper.png",
+            "coingecko_id": "",
+            "chains": ["Wanchain"]
+        },
+        {
+            "id": "297",
+            "code": "DEUS",
+            "name": "Deus",
+            "address": "0x3b62f3820e0b035cc4ad602dece6d796bc325325",
+            "image_url": "https://icons.llama.fi/deus.jpg",
+            "coingecko_id": "deus-finance",
+            "chains": ["Ethereum", "xDai"]
+        },
+        {
+            "id": "298",
+            "code": "HYFI",
+            "name": "Hyper Finance",
+            "address": "bsc:0x9a319b959e33369C5eaA494a770117eE3e585318",
+            "image_url": "https://icons.llama.fi/hyfi.png",
+            "coingecko_id": "hyper-finance",
+            "chains": ["Binance"]
+        },
+        {
+            "id": "299",
+            "code": "LEVIN",
+            "name": "Levinswap",
+            "address": "xdai:0x1698cd22278ef6e7c0df45a8dea72edbea9e42aa",
+            "image_url": "https://icons.llama.fi/levinswap.jpg",
+            "coingecko_id": "",
+            "chains": ["xDai"]
+        },
+        {
+            "id": "300",
+            "code": "BAG",
+            "name": "BondAppetit",
+            "address": "0x28A06c02287e657ec3F8e151A13C36A1D43814b0",
+            "image_url": "https://icons.llama.fi/bondappetit.jpg",
+            "coingecko_id": "bondappetit-gov-token",
+            "chains": ["Ethereum"]
+        },
+        {
+            "id": "301",
+            "code": "NRV",
+            "name": "Nerve",
+            "address": "bsc:0x42F6f551ae042cBe50C739158b4f0CAC0Edb9096",
+            "image_url": "https://icons.llama.fi/nerve.png",
+            "coingecko_id": "nerve-finance",
+            "chains": ["Binance"]
         }
     ]
 }
