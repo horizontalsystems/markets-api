@@ -1,5 +1,5 @@
 {
-    "version": 7,
+    "version": 8,
     "supported_currencies": [
         { "code": "USD", "name": "US Dollar" },
         { "code": "EUR", "name": "Euro" },
