@@ -17,9 +17,10 @@ class MarketsService {
     let lastTimestamp = 0
 
     elements.forEach(element => {
-      if (element.timestamp >= lastTimestamp) {
+      const itemTimestamp = parseInt(element.timestamp, 10)
+      if (itemTimestamp >= lastTimestamp) {
         reduced.push(element)
-        lastTimestamp = element.timestamp + period.range
+        lastTimestamp = itemTimestamp + period.range
       }
     })
 
@@ -79,7 +80,7 @@ class MarketsService {
   async getGlobalMarkets(currencyCode, period) {
     try {
       const rangePeriod = (Math.floor(Date.now() / 1000)) - TimePeriod.identify(period).seconds
-      const results = await Storage.getGlobalMarkets(rangePeriod)
+      let results = await Storage.getGlobalMarkets(rangePeriod)
 
       if (results) {
         const globalMarkets = []
@@ -101,6 +102,7 @@ class MarketsService {
           }
         } else resCurrencyCode = this.baseCurrencyCode
 
+        results = this.reduceElements(results, TimePeriod.identify(period))
         results.forEach(result => {
           if (resCurrencyCode.toUpperCase() !== this.baseCurrencyCode) {
             const xrateResult = usdXRates.find(rate => rate.timestamp === result.timestamp)
@@ -123,7 +125,7 @@ class MarketsService {
           globalMarkets.push(globalMarket)
         })
 
-        return this.reduceElements(globalMarkets, TimePeriod.identify(period))
+        return globalMarkets
       }
     } catch (e) {
       logger.error(`Error getting GlobalMarkets for period:${period} , ${e}`)
@@ -163,7 +165,7 @@ class MarketsService {
   async getCoinDefiMarkets(coinGeckoId, currencyCode, period) {
     try {
       const rangePeriod = (Math.floor(Date.now() / 1000)) - TimePeriod.identify(period).seconds
-      const results = await Storage.getDefiMarketsByCoin(coinGeckoId, rangePeriod)
+      let results = await Storage.getDefiMarketsByCoin(coinGeckoId, rangePeriod)
 
       if (results) {
         const coinDefiMarkets = []
@@ -185,6 +187,7 @@ class MarketsService {
           }
         } else resCurrencyCode = this.baseCurrencyCode
 
+        results = this.reduceElements(results, TimePeriod.identify(period))
         results.forEach(result => {
           if (resCurrencyCode.toUpperCase() !== this.baseCurrencyCode) {
             const xrateResult = usdXRates.find(rate => rate.timestamp === result.timestamp)
@@ -203,7 +206,7 @@ class MarketsService {
           coinDefiMarkets.push(coinDefiMarket)
         })
 
-        return this.reduceElements(coinDefiMarkets, TimePeriod.identify(period))
+        return coinDefiMarkets
       }
     } catch (e) {
       logger.error(`Error getting Coin:${coinGeckoId}, DefiMarkets for period:${period} , ${e}`)
