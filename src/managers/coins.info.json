@@ -1,5 +1,5 @@
 {
-    "version": 9,
+    "version": 10,
     "supported_currencies": [
         { "code": "USD", "name": "US Dollar" },
         { "code": "EUR", "name": "Euro" },
@@ -1563,7 +1563,7 @@
             "name": "Serum Swap",
             "address": "",
             "image_url": "https://icons.llama.fi/serum-amm.svg",
-            "coingecko_id": "serum",
+            "coingecko_id": "",
             "chains": ["Solana"]
         },
         {
