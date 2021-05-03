@@ -379,10 +379,10 @@
         },
         {
             "id": "149",
-            "code": "-",
+            "code": "BPRO",
             "name": "B.Protocol",
             "address": "",
-            "coingecko_id": "",
+            "coingecko_id": "b-protocol",
             "image_url": "https://icons.llama.fi/jPH5weGQ_400x400.jpg",
             "chains": ["Ethereum"]
         },
@@ -902,10 +902,10 @@
         },
         {
             "id": "211",
-            "code": "-",
+            "code": "SMTY",
             "name": "Smoothy",
             "address": "-",
-            "coingecko_id": "",
+            "coingecko_id": "smoothy",
             "image_url": "https://icons.llama.fi/dDxKgwPN_400x400.jpg",
             "chains": ["Ethereum"]
         },
@@ -1235,7 +1235,7 @@
         },
         {
             "id": "248",
-            "code": "-",
+            "code": "FORCE",
             "name": "ForceDAO ",
             "address": "-",
             "coingecko_id": "force-dao",
@@ -1271,10 +1271,10 @@
         },
         {
             "id": "252",
-            "code": "-",
+            "code": "SCRT",
             "name": "Secret Bridge",
             "address": "-",
-            "coingecko_id": "",
+            "coingecko_id": "secret",
             "image_url": "https://icons.llama.fi/TGwlZlS__400x400.jpg",
             "chains": ["Secret"]
         },
@@ -1473,7 +1473,7 @@
             "name": "Olive Cash",
             "address": "avax:0x617724974218a18769020a70162165a539c07e8a",
             "image_url": "https://icons.llama.fi/olive256.png",
-            "coingecko_id": "",
+            "coingecko_id": "olive-cash",
             "chains": ["Avalanche", "Binance"]
         },
         {
@@ -1500,7 +1500,7 @@
             "name": "Stakewise",
             "address": "-",
             "image_url": "https://icons.llama.fi/stakewise.png",
-            "coingecko_id": "",
+            "coingecko_id": "stakewise",
             "chains": ["Ethereum"]
         },
         {
@@ -1568,11 +1568,11 @@
         },
         {
             "id": "285",
-            "code": "-",
+            "code": "ocrv",
             "name": "Opyn",
             "address": "",
             "image_url": "https://icons.llama.fi/opyn.png",
-            "coingecko_id": "",
+            "coingecko_id": "ocrv",
             "chains": ["Ethereum"]
         },
         {
