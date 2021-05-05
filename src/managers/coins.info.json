@@ -1640,11 +1640,11 @@
         },
         {
             "id": "293",
-            "code": "-",
-            "name": "Lydia",
+            "code": "LYD",
+            "name": "Lydia Finance",
             "address": "",
             "image_url": "https://icons.llama.fi/lydia.jpg",
-            "coingecko_id": "",
+            "coingecko_id": "lydia-finance",
             "chains": ["Avalanche"]
         },
         {
