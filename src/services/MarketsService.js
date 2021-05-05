@@ -72,6 +72,7 @@ class MarketsService {
       }
     } catch (e) {
       logger.error(`Error getting latest GlobalMarkets ${e}`)
+      return { error: `Error getting latest GlobalMarkets for currency:${currencyCode}` }
     }
 
     return {}
@@ -129,9 +130,10 @@ class MarketsService {
       }
     } catch (e) {
       logger.error(`Error getting GlobalMarkets for period:${period} , ${e}`)
+      return { error: `Error getting GlobalMarkets for period:${period}` }
     }
 
-    return {}
+    return []
   }
 
   async getLatestCoinDefiMarkets(coinGeckoId, currencyCode) {
@@ -157,6 +159,7 @@ class MarketsService {
       }
     } catch (e) {
       logger.error(`Error getting latest CoinDefiMarkets ${e}`)
+      return { error: `Error getting latest CoinDefiMarkets:${coinGeckoId}` }
     }
 
     return {}
@@ -210,9 +213,9 @@ class MarketsService {
       }
     } catch (e) {
       logger.error(`Error getting Coin:${coinGeckoId}, DefiMarkets for period:${period} , ${e}`)
+      return { error: `Error getting Coin:${coinGeckoId}` }
     }
-
-    return {}
+    return []
   }
 
   async getDefiMarkets(currencyCode, requestDiffPeriods) {
@@ -266,9 +269,10 @@ class MarketsService {
       }
     } catch (e) {
       logger.error(`Error getting DefiMarkets :${e}`)
+      return { error: 'Error getting DefiMarkets' }
     }
 
-    return {}
+    return []
   }
 }
 

@@ -8,7 +8,11 @@ class MarketsController {
   getLatestGlobalMarkets(req, res) {
     this.marketService.getLatestGlobalMarkets(req.query.currency_code)
       .then(result => {
-        res.status(200).json(result)
+        if (result.error) {
+          res.status(500).json(result)
+        } else {
+          res.status(200).json(result)
+        }
       })
       .catch(error => {
         res.status(500).send(error)
@@ -18,7 +22,11 @@ class MarketsController {
   getGlobalMarkets(req, res) {
     this.marketService.getGlobalMarkets(req.query.currency_code, req.params.period)
       .then(result => {
-        res.status(200).json(result)
+        if (result.error) {
+          res.status(500).json(result)
+        } else {
+          res.status(200).json(result)
+        }
       })
       .catch(error => {
         res.status(500).send(error)
@@ -28,7 +36,11 @@ class MarketsController {
   getDefiMarkets(req, res) {
     this.marketService.getDefiMarkets(req.query.currency_code, req.query.diff_period)
       .then(result => {
-        res.status(200).json(result)
+        if (result.error) {
+          res.status(500).json(result)
+        } else {
+          res.status(200).json(result)
+        }
       })
       .catch(error => {
         res.status(500).send(error)
@@ -38,7 +50,11 @@ class MarketsController {
   getCoinDefiMarkets(req, res) {
     this.marketService.getCoinDefiMarkets(req.params.coinGeckoId, req.query.currency_code, req.params.period)
       .then(result => {
-        res.status(200).json(result)
+        if (result.error) {
+          res.status(500).json(result)
+        } else {
+          res.status(200).json(result)
+        }
       })
       .catch(error => {
         res.status(500).send(error)
@@ -48,7 +64,11 @@ class MarketsController {
   getLatestCoinDefiMarkets(req, res) {
     this.marketService.getLatestCoinDefiMarkets(req.params.coinGeckoId, req.query.currency_code)
       .then(result => {
-        res.status(200).json(result)
+        if (result.error) {
+          res.status(500).json(result)
+        } else {
+          res.status(200).json(result)
+        }
       })
       .catch(error => {
         res.status(500).send(error)
