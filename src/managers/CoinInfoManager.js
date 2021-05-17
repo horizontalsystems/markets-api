@@ -17,13 +17,15 @@ class CoinInfoManager {
       } else if (resourceInfo.version !== version) updateData = true
 
       if (updateData) {
-        const coinInfos = []
+        const promises = []
 
         coinsInfo.coins.forEach(coin => {
           let status = 0
 
-          if (Object.keys(coin.coingecko_id).length > 0) {
-            status = 1
+          if (coin.coingecko_id) {
+            if (Object.keys(coin.coingecko_id).length > 0) {
+              status = 1
+            }
           }
 
           const coinInfo = {
@@ -37,13 +39,17 @@ class CoinInfoManager {
             coinGeckoId: coin.coingecko_id,
             status
           }
-          coinInfos.push(coinInfo)
+          promises.push(Storage.updateCoinInfo(coin.id, coinInfo))
         })
-        Storage.updateCoinInfos(coinInfos)
-        Storage.saveResourceInfo({ name: ResourceType.COININFO, version })
+
+        Promise.all(promises).then(() => {
+          Storage.saveResourceInfo({ name: ResourceType.COININFO, version })
+        }).catch(e => {
+          logger.error(`Error when updating CoinInfoManager : ${e}`)
+        })
       }
     } catch (e) {
-      logger.log(e)
+      logger.error(`Error in CoinInfoManager : ${e}`)
     }
   }
 }

@@ -81,9 +81,16 @@ export default {
     })
   },
 
-  updateCoinInfos(coinInfos) {
-    return CoinInfo.bulkCreate(coinInfos, {
-      updateOnDuplicate: ['name', 'code', 'defillamaId', 'chains', 'coinGeckoId', 'status', 'imageUrl']
+  updateCoinInfo(coinId, coinInfo) {
+    return CoinInfo.findOne({
+      where: {
+        id: coinId
+      }
+    }).then(found => {
+      if (found) {
+        return found.update(coinInfo);
+      }
+      return CoinInfo.create(coinInfo);
     })
   },
 

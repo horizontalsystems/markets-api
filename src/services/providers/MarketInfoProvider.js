@@ -39,7 +39,7 @@ class MarketInfoProvider {
           code: data.symbol,
           address: data.address,
           imageUrl: data.logo,
-          chains: data.chains,
+          chains: data.chains ? data.chains.join(',') : '',
           defillamaId: data.name.toLowerCase().trim().replace(/ /g, '-'),
           coinGeckoId: data.gecko_id,
 
