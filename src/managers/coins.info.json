@@ -1,5 +1,5 @@
 {
-    "version": 10,
+    "version": 11,
     "supported_currencies": [
         { "code": "USD", "name": "US Dollar" },
         { "code": "EUR", "name": "Euro" },
@@ -1274,7 +1274,7 @@
             "code": "SCRT",
             "name": "Secret Bridge",
             "address": "-",
-            "coingecko_id": "secret",
+            "coingecko_id": "",
             "image_url": "https://icons.llama.fi/TGwlZlS__400x400.jpg",
             "chains": ["Secret"]
         },
@@ -1718,6 +1718,160 @@
             "image_url": "https://icons.llama.fi/nerve.png",
             "coingecko_id": "nerve-finance",
             "chains": ["Binance"]
+        },
+        {
+            "id": "302",
+            "currency_code": "USD",
+            "coingecko_id": "spookyswap",
+            "name": "SpookySwap",
+            "address": "fantom:0x841fad6eae12c286d1fd18d1d525dffa75c7effe",
+            "code": "BOO",
+            "chains": ["Fantom"],
+            "image_url": "https://icons.llama.fi/spooky.jpg"
+        },
+        {
+            "id": "303",
+            "coingecko_id": "zilswap",
+            "name": "ZilSwap",
+            "address": null,
+            "code": "ZWAP",
+            "chains": ["Zilliqa"],
+            "image_url": "https://icons.llama.fi/zilswap.png"
+        },
+        {
+            "id": "304",
+            "coingecko_id": "flamingo-finance",
+            "name": "Flamingo Finance",
+            "address": null,
+            "code": "FLM",
+            "chains": ["NEO"],
+            "image_url": "https://icons.llama.fi/flamingo.jpg"
+        },
+        {
+            "id": "305",
+            "coingecko_id": null,
+            "name": "Uniswap v3",
+            "address": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+            "code": "UNI",
+            "chains": ["Ethereum"],
+            "image_url": null
+        },
+        {
+            "id": "306",
+            "coingecko_id": "quick",
+            "name": "Quickswap",
+            "address": "0x6c28aef8977c9b773996d0e8376d2ee379446f2f",
+            "code": "QUICK",
+            "chains": ["Polygon"],
+            "image_url": "https://icons.llama.fi/quickswap.jpg"
+        },
+        {
+            "id": "307",
+            "coingecko_id": "wault",
+            "name": "Wault",
+            "address": "bsc:0xa9c41a46a6b3531d28d5c32f6633dd2ff05dfb90",
+            "code": "WEX",
+            "chains": ["Binance"],
+            "image_url": "https://icons.llama.fi/wault.jpg"
+        },
+        {
+            "id": "308",
+            "coingecko_id": "ruler-protocol",
+            "name": "Ruler",
+            "address": "0x2aeccb42482cc64e087b6d2e5da39f5a7a7001f8",
+            "code": "RULER",
+            "chains": ["Ethereum"],
+            "image_url": "https://icons.llama.fi/ruler.jpg"
+        },
+        {
+            "id": "309",
+            "coingecko_id": "wheat-token",
+            "name": "Wheat Protocol",
+            "address": "bsc:0x3ab63309F85df5D4c3351ff8EACb87980E05Da4E",
+            "code": "WHEAT",
+            "chains": ["Binance"],
+            "image_url": "https://icons.llama.fi/wheat-logo-desktop-dark.png"
+        },
+        {
+            "id": "310",
+            "coingecko_id": "belt",
+            "name": "Belt Finance",
+            "address": "bsc:0xe0e514c71282b6f4e823703a39374cf58dc3ea4f",
+            "code": "BELT",
+            "chains": ["Binance"],
+            "image_url": "https://icons.llama.fi/belt.png"
+        },
+        {
+            "id": "311",
+            "coingecko_id": "spiritswap",
+            "name": "SpiritSwap",
+            "address": "fantom:0x5cc61a78f164885776aa610fb0fe1257df78e59b",
+            "code": "SPIRIT",
+            "chains": ["Fantom"],
+            "image_url": "https://icons.llama.fi/spirit.jpg"
+        },
+        {
+            "id": "312",
+            "coingecko_id": "stacker-ventures",
+            "name": "Stacker Ventures",
+            "address": "0xe0955f26515d22e347b17669993fcefcc73c3a0a",
+            "code": "STACK",
+            "chains": ["Ethereum"],
+            "image_url": "https://icons.llama.fi/stacker.jpg"
+        },
+        {
+            "id": "313",
+            "coingecko_id": "viper",
+            "name": "ViperSwap",
+            "address": "harmony:0xEa589E93Ff18b1a1F1e9BaC7EF3E86Ab62addc79",
+            "code": "VIPER",
+            "chains": ["Harmony"],
+            "image_url": "https://icons.llama.fi/viper.png"
+        },
+        {
+            "id": "314",
+            "coingecko_id": "gondala-finance",
+            "name": "Gondola Finance",
+            "address": "avax:0xd606199557c8ab6f4cc70bd03facc96ca576f142",
+            "code": "GDL",
+            "chains": ["Avalanche"],
+            "image_url": "https://icons.llama.fi/gondola.jpg"
+        },
+        {
+            "id": "315",
+            "coingecko_id": null,
+            "name": "SolFarm",
+            "address": null,
+            "code": null,
+            "chains": ["Solana"],
+            "image_url": "https://icons.llama.fi/solfarm.svg"
+        },
+        {
+            "id": "316",
+            "coingecko_id": "sefi",
+            "name": "SecretSwap",
+            "address": "0x773258b03c730f84af10dfcb1bfaa7487558b8ac",
+            "code": "SEFI",
+            "chains": ["Secret"],
+            "image_url": "https://icons.llama.fi/secretswap.png"
+        },
+        {
+            "id": "317",
+            "coingecko_id": null,
+            "name": "HyperSwap",
+            "address": null,
+            "code": null,
+            "chains": ["Fantom"],
+            "image_url": "https://icons.llama.fi/hyperjump.jpg"
+        },
+        {
+            "id": "318",
+            "coingecko_id": "dfyn-network",
+            "name": "Dfyn Network",
+            "address": "0x9695e0114e12c0d3a3636fab5a18e6b737529023",
+            "code": "DFYN",
+            "chains": ["Polygon"],
+            "image_url": "https://icons.llama.fi/dfyn.jpg"
         }
     ]
 }
