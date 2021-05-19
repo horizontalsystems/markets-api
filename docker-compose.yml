@@ -13,6 +13,7 @@ services:
         environment:
             - NODE_ENV=production
             - PORT=3000
+            - ETHPLORER_API_KEY=key
     db:
         container_name: postgres
         image: postgres:12-alpine
