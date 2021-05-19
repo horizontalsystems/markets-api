@@ -1,33 +1,45 @@
 import express from 'express'
-import bodyParser from 'body-parser'
 import compression from 'compression'
 import helmet from 'helmet'
 import xss from 'xss-clean'
 import cors from 'cors'
-import routes from './routes'
+import AppRoutes from './routes/AppRoutes'
+import logger from './logger'
 
-const server = express()
+class Server {
+  constructor(marketsService, tokenInfoService) {
+    this.marketsService = marketsService
+    this.tokenInfoService = tokenInfoService
 
-// set security HTTP headers
-server.use(helmet())
+    this.server = express()
 
-// parse json request body
-server.use(bodyParser.json())
+    // set security HTTP headers
+    this.server.use(helmet())
 
-// parse urlencoded request body
-server.use(bodyParser.urlencoded({ extended: true }))
+    // parse json request body
+    this.server.use(express.json())
 
-// sanitize request data
-server.use(xss())
+    // parse urlencoded request body
+    this.server.use(express.urlencoded({ extended: true }))
 
-// gzip compression
-server.use(compression())
+    // sanitize request data
+    this.server.use(xss())
 
-// enable cors
-server.use(cors())
-server.options('*', cors())
+    // gzip compression
+    this.server.use(compression())
 
-// API routes
-routes(server)
+    // enable cors
+    this.server.use(cors())
+    this.server.options('*', cors())
+    const appRoutes = new AppRoutes(this.marketsService, this.tokenInfoService)
+    this.server.use(appRoutes.getRouter())
+  }
 
-export default server
+  start() {
+    this.server.listen(process.env.PORT, () => {
+      logger.info(`Server started at port ${process.env.PORT}`)
+    })
+  }
+}
+
+export default Server
