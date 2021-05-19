@@ -52,7 +52,7 @@ class MarketInfoProvider {
         return defiMarkets
       }
     } catch (e) {
-      logger.log(`Error fetching defimarkets!${e}`)
+      logger.error(`Error fetching defimarkets!${e}`)
     }
 
     return {}
@@ -93,7 +93,7 @@ class MarketInfoProvider {
         return xrates
       }
     } catch (e) {
-      logger.log(`Error fetching xrates!${e}`)
+      logger.error(`Error fetching xrates!${e}`)
     }
 
     return {}
