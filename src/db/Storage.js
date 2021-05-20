@@ -4,6 +4,7 @@ import GlobalMarkets from '../models/GlobalMarkets'
 import CoinInfo from '../models/CoinInfo'
 import ResourceInfo from '../models/ResourceInfo'
 import XRate from '../models/XRate'
+import TokenInfo from '../models/TokenInfo'
 
 export default {
   saveXRates(rates) {
@@ -160,6 +161,32 @@ export default {
     });
 
     return defiMarkets
-  }
+  },
 
+  getTokenHolders(tokenAddress, timestamp) {
+    return TokenInfo.findOne({
+      include: ['tokenHolders'],
+      where: {
+        tokenAddress,
+        timestamp: {
+          [Sequelize.Op.gte]: timestamp
+        }
+      },
+      order: [['tokenHolders', 'balance', 'DESC']]
+    })
+  },
+
+  removeTokenHolders(tokenAddress) {
+    return TokenInfo.destroy({
+      where: {
+        tokenAddress
+      }
+    });
+  },
+
+  saveTokenHolders(tokenInfo) {
+    return TokenInfo.create(tokenInfo, {
+      include: ['tokenHolders']
+    })
+  }
 }

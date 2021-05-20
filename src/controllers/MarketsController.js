@@ -1,8 +1,6 @@
-import MarketsService from '../services/MarketsService'
-
 class MarketsController {
-  constructor() {
-    this.marketService = new MarketsService()
+  constructor(marketsService) {
+    this.marketService = marketsService
   }
 
   getLatestGlobalMarkets(req, res) {
