@@ -5,9 +5,13 @@ class TokenInfoProvider {
     this.ethplorerProvider = ethplorerProvider
   }
 
-  getTopTokenHolders(tokenAddress, limit) {
+  async getTopTokenHolders(tokenAddress, limit) {
     try {
-      return this.ethplorerProvider.getTopTokenHolders(tokenAddress, limit)
+      const responses = await this.ethplorerProvider.getTopTokenHolders(tokenAddress, limit)
+      return responses.map(item => ({
+        address: item.address,
+        share: item.share
+      }))
     } catch (e) {
       logger.error(`Error fetching holders: ${e}`)
     }
