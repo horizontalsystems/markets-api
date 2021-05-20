@@ -27,12 +27,12 @@ class TokenInfoService {
 
       if (holders.length > 0) {
         await Storage.removeTokenHolders(tokenAddress)
-        const aa = {
+        const tokenData = {
           tokenAddress,
           timestamp: now,
           tokenHolders: holders
         }
-        Storage.saveTokenHolders(aa)
+        Storage.saveTokenHolders(tokenData)
 
         return holders.slice(0, limit)
       }
