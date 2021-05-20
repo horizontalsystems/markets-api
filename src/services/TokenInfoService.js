@@ -1,7 +1,7 @@
 import Storage from '../db/Storage'
 import logger from '../logger'
 
-const DATA_LIFE_TIME = 1200 // 15 mins
+const DATA_LIFE_TIME = 1200 // 20 mins
 const MAX_HOLDERS_TO_STORE = 50
 
 class TokenInfoService {
@@ -18,7 +18,6 @@ class TokenInfoService {
       if (tokenInfo) {
         return tokenInfo.tokenHolders.slice(0, limit).map(item => ({
           address: item.address,
-          balance: parseInt(item.balance, 10),
           share: item.share
         }))
       }
