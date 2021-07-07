@@ -3,6 +3,7 @@ import configJson from '../db/config.json'
 import GlobalMarkets from './GlobalMarkets'
 import CoinInfo from './CoinInfo'
 import DefiMarkets from './DefiMarkets'
+import ChainDefiMarkets from './ChainDefiMarkets'
 import ResourceInfo from './ResourceInfo'
 import FiatXRate from './XRate'
 import TokenInfo from './TokenInfo'
@@ -19,6 +20,7 @@ const sequelize = new Sequelize(
 const models = {
   GlobalMarkets: GlobalMarkets.init(sequelize, Sequelize),
   DefiMarkets: DefiMarkets.init(sequelize, Sequelize),
+  ChainDefiMarkets: ChainDefiMarkets.init(sequelize, Sequelize),
   ResourceInfo: ResourceInfo.init(sequelize, Sequelize),
   CoinInfo: CoinInfo.init(sequelize, Sequelize),
   FiatXRate: FiatXRate.init(sequelize, Sequelize),
