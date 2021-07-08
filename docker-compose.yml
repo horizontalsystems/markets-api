@@ -12,8 +12,8 @@ services:
             - '3000:3000'
         environment:
             - NODE_ENV=production
-            - PORT=3000
-            - ETHPLORER_API_KEY=key
+            - PORT=${PORT}
+            - ETHPLORER_API_KEY=${ETHPLORER_API_KEY}
     db:
         container_name: postgres
         image: postgres:12-alpine
