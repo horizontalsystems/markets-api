@@ -102,7 +102,7 @@ export default {
                             tbc.chains, tbc.image_url, tbm.tvl, tbm.timestamp
                           FROM tb_defi_markets tbm,
                                tb_coin_info tbc
-                          WHERE tbc.id = tbm.coin_id
+                          WHERE tbc.id = tbm.coin_id and tbc.status=1
                           ORDER BY tbm.coin_id, tbm.timestamp DESC
                       ) AS tbl`
 
