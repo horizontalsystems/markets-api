@@ -38,6 +38,10 @@ class MarketInfoProvider {
   }
 
   checkValues(latestValue, newValue) {
+    if (latestValue === 0) {
+      return true
+    }
+
     const diff = (Math.abs(latestValue - newValue) * 100) / latestValue
     if (diff <= 20) {
       return true

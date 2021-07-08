@@ -250,7 +250,7 @@ class MarketsService {
             chains: result.chains ? result.chains.split(',') : [],
             image_url: result.image_url,
             tvl: result.tvl * xrate.usdXRate,
-            rank: result.rank,
+            tvl_rank: result.rank,
             chain_filter: chainFilter
           }))
 
