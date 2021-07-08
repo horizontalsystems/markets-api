@@ -218,10 +218,15 @@ class MarketsService {
     return []
   }
 
-  async getDefiMarkets(currencyCode, requestDiffPeriods) {
+  async getDefiMarkets(currencyCode, requestDiffPeriods, chainFilterParam) {
     try {
       const diffPeriods = requestDiffPeriods || '24h'
-      const results = await Storage.getDefiMarkets()
+      let results = await Storage.getDefiMarkets()
+      let chainFilter = chainFilterParam
+
+      if (!chainFilterParam) {
+        chainFilter = 'all'
+      }
 
       if (results) {
         if (results.length > 0) {
@@ -229,6 +234,12 @@ class MarketsService {
 
           const xrate = await this.getXRate(currencyCode, timestamp)
           if (!xrate) return {}
+
+          // -----------------------------------------------
+          // Filter output data
+          if (chainFilter !== 'all') {
+            results = results.filter(data => data.chains.includes(chainFilter))
+          }
 
           const defiMarkets = results.map(result => ({
             id: result.coin_id,
@@ -238,11 +249,14 @@ class MarketsService {
             code: result.code,
             chains: result.chains ? result.chains.split(',') : [],
             image_url: result.image_url,
-            tvl: result.tvl * xrate.usdXRate
+            tvl: result.tvl * xrate.usdXRate,
+            rank: result.rank,
+            chain_filter: chainFilter
           }))
 
           // -----------------------------------------------
           // Fetch diff for periods
+
           if (diffPeriods) {
             const periods = diffPeriods.split(',')
             if (periods.length > 0) {
@@ -250,7 +264,15 @@ class MarketsService {
                 periods.map(period => {
                   const timePeriod = TimePeriod.identify(period)
                   const fromTimestamp = (Math.floor(Date.now() / 1000)) - timePeriod.seconds
-                  return Storage.getDefiMarketsDiff(fromTimestamp).then(diffResults => {
+                  let storageMethod
+
+                  if (chainFilter === 'all') {
+                    storageMethod = Storage.getDefiMarketsDiff(fromTimestamp)
+                  } else {
+                    storageMethod = Storage.getChainDefiMarketsDiff(fromTimestamp, chainFilter)
+                  }
+
+                  return storageMethod.then(diffResults => {
                     defiMarkets.forEach(dfm => {
                       const found = diffResults.find(dr => dr.coin_id === dfm.id)
                       if (found) {

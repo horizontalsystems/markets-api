@@ -10,29 +10,32 @@ class CoinInfo extends Sequelize.Model {
           primaryKey: true
         },
         name: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING(50)
         },
         code: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING(25)
         },
         address: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING(120)
+        },
+        chain: {
+          type: DataTypes.STRING(30)
         },
         chains: {
-          type: DataTypes.STRING
+          type: DataTypes.STRING(120)
         },
         imageUrl: {
-          type: DataTypes.STRING,
+          type: DataTypes.STRING(400),
           field: 'image_url'
         },
         defillamaId: {
-          type: DataTypes.STRING,
+          type: DataTypes.STRING(50),
           unique: true,
           allowNull: false,
           field: 'defillama_id'
         },
         coinGeckoId: {
-          type: DataTypes.STRING,
+          type: DataTypes.STRING(70),
           field: 'coingecko_id'
         },
         status: {
@@ -50,6 +53,14 @@ class CoinInfo extends Sequelize.Model {
   static associate(models) {
     CoinInfo.hasMany(models.DefiMarkets, {
       as: 'defiMarkets',
+      foreignKey: {
+        name: 'coin_id',
+        fieldName: 'coinId'
+      }
+    });
+
+    CoinInfo.hasMany(models.ChainDefiMarkets, {
+      as: 'chainDefiMarkets',
       foreignKey: {
         name: 'coin_id',
         fieldName: 'coinId'

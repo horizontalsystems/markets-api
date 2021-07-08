@@ -32,7 +32,7 @@ class MarketsController {
   }
 
   getDefiMarkets(req, res) {
-    this.marketService.getDefiMarkets(req.query.currency_code, req.query.diff_period)
+    this.marketService.getDefiMarkets(req.query.currency_code, req.query.diff_period, req.query.chain_filter)
       .then(result => {
         if (result.error) {
           res.status(500).json(result)
