@@ -200,7 +200,7 @@ export default {
           [Sequelize.Op.gte]: timestamp
         }
       },
-      order: [['tokenHolders', 'balance', 'DESC']]
+      order: [['tokenHolders', 'share', 'DESC']]
     })
   },
 
