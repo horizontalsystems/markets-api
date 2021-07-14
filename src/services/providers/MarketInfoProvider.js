@@ -1,11 +1,12 @@
 import logger from '../../logger'
+import Utils from '../../utils/Utils'
 
 class MarketInfoProvider {
   constructor(coingeckoProvider, defiLlamaProvider) {
     this.coingeckoProvider = coingeckoProvider
     this.defiLlamaProvider = defiLlamaProvider
-    this.latestTvl = 0
-    this.latestVolume24h = 0
+    this.latestGlobalTvl = 0
+    this.latestGlobalVolume24h = 0
   }
 
   async getGlobalMarkets(timestamp) {
@@ -18,17 +19,17 @@ class MarketInfoProvider {
       globalData.timestamp = timestamp
       globalData.marketCapDefi = globalDefiData.marketCapDefi
 
-      if (this.checkValues(this.latestVolume24h, globalData.volume24h)) {
-        this.latestVolume24h = globalData.volume24h
+      if (this.checkValues(this.latestGlobalVolume24h, globalData.volume24h)) {
+        this.latestGlobalVolume24h = globalData.volume24h
       } else {
-        globalData.volume24h = this.latestVolume24h
+        globalData.volume24h = this.latestGlobalVolume24h
       }
 
-      if (this.checkValues(this.latestTvl, defiLlamaData.totalValueLocked)) {
+      if (this.checkValues(this.latestGlobalTvl, defiLlamaData.totalValueLocked)) {
         globalData.totalValueLocked = defiLlamaData.totalValueLocked
-        this.latestTvl = defiLlamaData.totalValueLocked
+        this.latestGlobalTvl = defiLlamaData.totalValueLocked
       } else {
-        globalData.totalValueLocked = this.latestTvl
+        globalData.totalValueLocked = this.latestGlobalTvl
       }
 
       return globalData
@@ -52,51 +53,55 @@ class MarketInfoProvider {
   async getDefiMarkets(timestamp) {
     try {
       const defiLlamaData = await this.defiLlamaProvider.getDefiMarkets()
+
       if (defiLlamaData) {
         const defiMarkets = []
+        defiLlamaData.data.sort(Utils.sortByPropertyDesc('tvl'))
 
-        defiLlamaData.data.forEach(data => {
-          const chainDefiMarkets = []
+        defiLlamaData.data.forEach((data, i) => {
+          if (data.tvl > 0 && data.tvl < 100000000000) {
+            const chainDefiMarkets = []
 
-          if (Object.keys(data.chainTvls).length > 0) {
-            Object.keys(data.chainTvls).forEach(key => {
-              let tvl = data.chainTvls[key]
-              if (Object.keys(data.chainTvls).length === 1 && data.chainTvls[key] === 0) {
-                tvl = data.tvl
-              }
+            if (Object.keys(data.chainTvls).length > 0) {
+              Object.keys(data.chainTvls).forEach(key => {
+                let tvl = data.chainTvls[key]
+                if (Object.keys(data.chainTvls).length === 1 && data.chainTvls[key] === 0) {
+                  tvl = data.tvl
+                }
 
+                chainDefiMarkets.push({
+                  timestamp,
+                  chain: key.toLowerCase(),
+                  totalValueLocked: tvl
+                })
+              })
+            } else {
               chainDefiMarkets.push({
                 timestamp,
-                chain: key.toLowerCase(),
-                totalValueLocked: tvl
+                chain: data.chain.toLowerCase(),
+                totalValueLocked: data.tvl
               })
-            })
-          } else {
-            chainDefiMarkets.push({
-              timestamp,
+            }
+
+            defiMarkets.push({
+              id: data.id,
+              name: data.name,
+              code: data.symbol,
+              address: data.address,
+              tvlRank: parseInt(i + 1, 10),
+              imageUrl: data.logo,
               chain: data.chain.toLowerCase(),
-              totalValueLocked: data.tvl
+              chains: data.chains ? data.chains.join(',').toLowerCase() : '',
+              coinGeckoId: data.gecko_id ? data.gecko_id.trim() : '',
+
+              defiMarkets: {
+                timestamp,
+                totalValueLocked: data.tvl
+              },
+
+              chainDefiMarkets
             })
           }
-
-          defiMarkets.push({
-            id: data.id,
-            name: data.name,
-            code: data.symbol,
-            address: data.address,
-            imageUrl: data.logo,
-            chain: data.chain.toLowerCase(),
-            chains: data.chains ? data.chains.join(',').toLowerCase() : '',
-            defillamaId: data.name.toLowerCase().trim().replace(/ /g, '-'),
-            coinGeckoId: data.gecko_id ? data.gecko_id.trim() : '',
-
-            defiMarkets: {
-              timestamp,
-              totalValueLocked: data.tvl
-            },
-
-            chainDefiMarkets
-          })
         })
 
         return defiMarkets

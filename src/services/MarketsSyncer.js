@@ -2,7 +2,7 @@ import cron from 'node-cron'
 import Storage from '../db/Storage'
 import logger from '../logger'
 
-const EVERY_20M = '0 */30 * * * *' // every 30 min
+const EVERY_20M = '0 */25 * * * *' // every 25 min
 
 class MarketsSyncer {
   constructor(marketInfoProvider, currencies) {
@@ -31,13 +31,15 @@ class MarketsSyncer {
   syncGlobalMarkets(now) {
     this.marketInfoProvider.getGlobalMarkets(now).then(data => {
       Storage.saveGlobalMarkets(data)
-    }).catch(e => logger.error(e));
+    }).catch(e => logger.error(`Error syncing global markets: ${e}`));
   }
 
   async syncDefiMarkets(now) {
     this.marketInfoProvider.getDefiMarkets(now).then(data => {
-      Storage.saveCoinInfoDetails(data)
-    }).catch(e => logger.error(e));
+      Storage.saveCoinInfoDetails(data).catch(
+        e => logger.error(`Error saving defi markets: ${e}`)
+      );
+    }).catch(e => logger.error(`Error syncing defi markets: ${e}`));
   }
 
   async syncXRates(now) {
@@ -45,7 +47,7 @@ class MarketsSyncer {
       Storage.saveXRates(data).catch(
         e => logger.error(`Error saving xrates: ${e}`)
       );
-    }).catch(e => logger.error(e.stack));
+    }).catch(e => logger.error(`Error syncing xrates: ${e}`));
   }
 }
 

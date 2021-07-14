@@ -3,18 +3,23 @@ import axios from 'axios'
 class DefiLlamaProvider {
   constructor() {
     this.baseUrl = 'https://api.llama.fi'
-    this.Responsetimeout = 180000
-    axios.defaults.timeout = 180000;
+    this.Responsetimeout = 280000
+    axios.defaults.timeout = 280000;
   }
 
   async getGlobalDefiMarkets() {
-    const { data } = await axios.get(`${this.baseUrl}/charts`, { timeout: this.Responsetimeout })
+    try {
+      const { data } = await axios.get(`${this.baseUrl}/charts`, { timeout: this.Responsetimeout })
 
-    const lastItem = data.pop()
-
-    return {
-      totalValueLocked: lastItem.totalLiquidityUSD
+      const lastItem = data.pop()
+      return {
+        totalValueLocked: lastItem.totalLiquidityUSD
+      }
+    } catch (e) {
+      console.log(e)
     }
+
+    return {}
   }
 
   getDefiMarkets() {

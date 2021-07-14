@@ -77,8 +77,8 @@ export default {
 
   saveCoinInfoDetails(coins) {
     return CoinInfo.bulkCreate(coins, {
-      include: ['defiMarkets', 'chainDefiMarkets'],
-      ignoreDuplicates: true
+      updateOnDuplicate: ['coinGeckoId', 'code', 'name', 'imageUrl', 'chain', 'tvlRank'],
+      include: ['defiMarkets', 'chainDefiMarkets']
     })
   },
 
@@ -96,15 +96,13 @@ export default {
   },
 
   async getDefiMarkets() {
-    const sql = `SELECT *, ROW_NUMBER() over(order by tbl.tvl desc) AS rank
-                 FROM ( SELECT DISTINCT ON (tbm.coin_id) tbm.coin_id,
-                            tbc.coingecko_id, tbc.code, tbc.name, tbc.chain,
-                            tbc.chains, tbc.image_url, tbm.tvl, tbm.timestamp
-                          FROM tb_defi_markets tbm,
-                               tb_coin_info tbc
-                          WHERE tbc.id = tbm.coin_id and tbc.status=1
-                          ORDER BY tbm.coin_id, tbm.timestamp DESC
-                      ) AS tbl`
+    const sql = `SELECT DISTINCT ON (tbm.coin_id) tbm.coin_id, tbc.tvl_rank,
+                   tbc.coingecko_id, tbc.code, tbc.name, tbc.chain,
+                   tbc.chains, tbc.image_url, tbm.tvl, tbm.timestamp
+                 FROM tb_defi_markets tbm,
+                      tb_coin_info tbc
+                 WHERE tbc.id = tbm.coin_id and tbc.status = 1
+                 ORDER BY tbm.coin_id, tbm.timestamp DESC`
 
     const defiMarkets = await models.sequelize.query(sql, {
       type: Sequelize.QueryTypes.SELECT
@@ -129,15 +127,11 @@ export default {
   },
 
   async getLatestCoinDefiMarkets(coinGeckoId) {
-    const sql = `SELECT *
-                 FROM  (SELECT *, row_number() over(order by tbf.tvl DESC) as position
-                      FROM  ( SELECT DISTINCT ON (tbc.id) tbc.id, tbc.code,tbc.*, tbf.*
-                              FROM tb_coin_info tbc, tb_defi_markets tbf
-                              WHERE tbf.coin_id = tbc.id
-                              ORDER BY tbc.id, tbf.timestamp DESC
-                            ) AS tbf
-                      ) AS tbf
-                 WHERE coingecko_id=:coinGeckoId`
+    const sql = `SELECT DISTINCT ON (tbc.id) tbc.id, tbc.*, tbf.*
+                  FROM tb_coin_info tbc, tb_defi_markets tbf
+                  WHERE tbf.coin_id = tbc.id AND
+                        tbc.coingecko_id=:coinGeckoId
+                  ORDER BY tbc.id, tbf.timestamp DESC`
 
     const coinDefiMarkets = await models.sequelize.query(sql, {
       replacements: { coinGeckoId },
@@ -147,27 +141,30 @@ export default {
     return coinDefiMarkets
   },
 
-  async getDefiMarketsDiff(fromTimestamp) {
+  async getDefiMarketsDiff(fromTimestamp, coinIds) {
     const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id,
                     tb1.timestamp,
                     CASE WHEN tb2.tvl <=0 THEN 0
                      ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
                     END AS tvl_diff
                  FROM tb_defi_markets tb1,
-                      (SELECT DISTINCT ON (coin_id) coin_id,tvl, timestamp FROM tb_defi_markets
-                       WHERE timestamp>=:fromTimestamp order by coin_id, timestamp) tb2
+                      (SELECT DISTINCT ON (coin_id) coin_id, tvl, timestamp
+                       FROM tb_defi_markets
+                       WHERE timestamp>=:fromTimestamp AND
+                             coin_id IN (:coinIds)
+                       ORDER BY coin_id, timestamp) tb2
                  WHERE tb2.coin_id = tb1.coin_id
                  ORDER BY tb1.coin_id, tb1.timestamp DESC`
 
     const defiMarkets = await models.sequelize.query(sql, {
-      replacements: { fromTimestamp },
+      replacements: { fromTimestamp, coinIds },
       type: Sequelize.QueryTypes.SELECT
     });
 
     return defiMarkets
   },
 
-  async getChainDefiMarketsDiff(fromTimestamp, chainFilter) {
+  async getChainDefiMarketsDiff(fromTimestamp, chainFilter, coinIds) {
     const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id, tb1.timestamp,
                         CASE WHEN tb2.tvl <=0 THEN 0
                             ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
@@ -176,7 +173,8 @@ export default {
                       ( SELECT DISTINCT ON (coin_id) coin_id,tvl, timestamp
                         FROM tb_chain_defi_markets
                         WHERE timestamp>=:fromTimestamp AND
-                              chain=:chainFilter
+                              chain=:chainFilter AND
+                              coin_id IN (:coinIds)
                         ORDER BY coin_id, timestamp
                       ) tb2
                  WHERE tb2.coin_id = tb1.coin_id AND
@@ -184,7 +182,7 @@ export default {
                  ORDER BY tb1.coin_id, tb1.timestamp DESC`
 
     const defiMarkets = await models.sequelize.query(sql, {
-      replacements: { fromTimestamp, chainFilter },
+      replacements: { fromTimestamp, chainFilter, coinIds },
       type: Sequelize.QueryTypes.SELECT
     });
 

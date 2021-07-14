@@ -154,7 +154,7 @@ class MarketsService {
           image_url: defiMarket.image_url,
           timestamp: parseInt(defiMarket.timestamp, 10),
           tvl: defiMarket.tvl * xrate.usdXRate,
-          tvl_rank: parseInt(defiMarket.position, 10)
+          tvl_rank: parseInt(defiMarket.tvl_rank, 10)
         }
       }
     } catch (e) {
@@ -231,6 +231,7 @@ class MarketsService {
       if (results) {
         if (results.length > 0) {
           const { timestamp } = results[0]
+          const coinIds = results.map(coin => coin.coin_id)
 
           const xrate = await this.getXRate(currencyCode, timestamp)
           if (!xrate) return {}
@@ -242,7 +243,7 @@ class MarketsService {
           }
 
           const defiMarkets = results.map(result => ({
-            id: result.coin_id,
+            id: parseInt(result.coin_id, 10),
             currency_code: xrate.currencyCode,
             coingecko_id: result.coingecko_id,
             name: result.name,
@@ -250,7 +251,7 @@ class MarketsService {
             chains: result.chains ? result.chains.split(',') : [],
             image_url: result.image_url,
             tvl: result.tvl * xrate.usdXRate,
-            tvl_rank: parseInt(result.rank, 10),
+            tvl_rank: parseInt(result.tvl_rank, 10),
             chain_filter: chainFilter
           }))
 
@@ -267,9 +268,9 @@ class MarketsService {
                   let storageMethod
 
                   if (chainFilter === 'all') {
-                    storageMethod = Storage.getDefiMarketsDiff(fromTimestamp)
+                    storageMethod = Storage.getDefiMarketsDiff(fromTimestamp, coinIds)
                   } else {
-                    storageMethod = Storage.getChainDefiMarketsDiff(fromTimestamp, chainFilter)
+                    storageMethod = Storage.getChainDefiMarketsDiff(fromTimestamp, chainFilter, coinIds)
                   }
 
                   return storageMethod.then(diffResults => {
@@ -277,6 +278,8 @@ class MarketsService {
                       const found = diffResults.find(dr => dr.coin_id === dfm.id)
                       if (found) {
                         dfm[`tvl_diff_${timePeriod.name}`] = found.tvl_diff
+                      } else {
+                        dfm[`tvl_diff_${timePeriod.name}`] = parseInt(0, 10)
                       }
                     })
                   })
