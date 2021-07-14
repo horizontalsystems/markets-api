@@ -28,18 +28,17 @@ class CoinInfo extends Sequelize.Model {
           type: DataTypes.STRING(400),
           field: 'image_url'
         },
-        defillamaId: {
-          type: DataTypes.STRING(50),
-          unique: true,
-          allowNull: false,
-          field: 'defillama_id'
-        },
         coinGeckoId: {
           type: DataTypes.STRING(70),
           field: 'coingecko_id'
         },
         status: {
           type: DataTypes.INTEGER, defaultValue: 1
+        },
+        tvlRank: {
+          type: DataTypes.INTEGER,
+          defaultValue: 0,
+          field: 'tvl_rank'
         }
       },
       {

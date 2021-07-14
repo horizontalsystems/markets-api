@@ -36,7 +36,6 @@ class CoinInfoManager {
             chain: coin.chain,
             chains: coin.chains ? coin.chains.join(',').toLowerCase() : '',
             imageUrl: coin.image_url,
-            defillamaId: coin.name.toLowerCase().trim().replace(/ /g, '-'),
             coinGeckoId: coin.coingecko_id,
             status
           }
