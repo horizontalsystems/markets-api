@@ -95,14 +95,12 @@ export default {
     })
   },
 
-  async getDefiMarkets() {
-    const sql = `SELECT DISTINCT ON (tbm.coin_id) tbm.coin_id, tbc.tvl_rank,
-                   tbc.coingecko_id, tbc.code, tbc.name, tbc.chain,
-                   tbc.chains, tbc.image_url, tbm.tvl, tbm.timestamp
-                 FROM tb_defi_markets tbm,
-                      tb_coin_info tbc
-                 WHERE tbc.id = tbm.coin_id and tbc.status = 1
-                 ORDER BY tbm.coin_id, tbm.timestamp DESC`
+  async getCoinsInfo() {
+    const sql = `SELECT *
+                  FROM tb_coin_info
+                  WHERE status = 1 AND
+                        tvl_rank<>0
+                  ORDER BY tvl_rank`
 
     const defiMarkets = await models.sequelize.query(sql, {
       type: Sequelize.QueryTypes.SELECT
@@ -143,7 +141,7 @@ export default {
 
   async getDefiMarketsDiff(fromTimestamp, coinIds) {
     const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id,
-                    tb1.timestamp,
+                    tb1.timestamp, tb1.tvl,
                     CASE WHEN tb2.tvl <=0 THEN 0
                      ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
                     END AS tvl_diff
@@ -165,7 +163,8 @@ export default {
   },
 
   async getChainDefiMarketsDiff(fromTimestamp, chainFilter, coinIds) {
-    const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id, tb1.timestamp,
+    const sql = `SELECT DISTINCT ON (tb1.coin_id) tb1.coin_id,
+                        tb1.timestamp, tb1.tvl,
                         CASE WHEN tb2.tvl <=0 THEN 0
                             ELSE ((tb1.tvl-tb2.tvl)* 100)/tb2.tvl
                         END AS tvl_diff

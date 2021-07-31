@@ -221,7 +221,7 @@ class MarketsService {
   async getDefiMarkets(currencyCode, requestDiffPeriods, chainFilterParam) {
     try {
       const diffPeriods = requestDiffPeriods || '24h'
-      let results = await Storage.getDefiMarkets()
+      let results = await Storage.getCoinsInfo()
       let chainFilter = chainFilterParam
 
       if (!chainFilterParam) {
@@ -231,7 +231,7 @@ class MarketsService {
       if (results) {
         if (results.length > 0) {
           const { timestamp } = results[0]
-          const coinIds = results.map(coin => coin.coin_id)
+          const coinIds = results.map(coin => coin.id)
 
           const xrate = await this.getXRate(currencyCode, timestamp)
           if (!xrate) return {}
@@ -243,14 +243,13 @@ class MarketsService {
           }
 
           const defiMarkets = results.map(result => ({
-            id: parseInt(result.coin_id, 10),
+            id: parseInt(result.id, 10),
             currency_code: xrate.currencyCode,
             coingecko_id: result.coingecko_id,
             name: result.name,
             code: result.code,
             chains: result.chains ? result.chains.split(',') : [],
             image_url: result.image_url,
-            tvl: result.tvl * xrate.usdXRate,
             tvl_rank: parseInt(result.tvl_rank, 10),
             chain_filter: chainFilter
           }))
@@ -275,11 +274,13 @@ class MarketsService {
 
                   return storageMethod.then(diffResults => {
                     defiMarkets.forEach(dfm => {
-                      const found = diffResults.find(dr => dr.coin_id === dfm.id)
+                      const found = diffResults.find(dr => dr.coin_id === dfm.id.toString())
                       if (found) {
                         dfm[`tvl_diff_${timePeriod.name}`] = found.tvl_diff
+                        dfm.tvl = found.tvl * xrate.usdXRate
                       } else {
                         dfm[`tvl_diff_${timePeriod.name}`] = parseInt(0, 10)
+                        dfm.tvl = 0
                       }
                     })
                   })
