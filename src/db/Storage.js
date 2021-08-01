@@ -5,12 +5,54 @@ import CoinInfo from '../models/CoinInfo'
 import ResourceInfo from '../models/ResourceInfo'
 import XRate from '../models/XRate'
 import TokenInfo from '../models/TokenInfo'
+import DefiMarketsCache from '../models/DefiMarketsCache'
 
 export default {
   saveXRates(rates) {
     return XRate.bulkCreate(rates, {
       ignoreDuplicates: true
     })
+  },
+
+  deleteDefiMarketsCache() {
+    return DefiMarketsCache.destroy({
+      where: {},
+      truncate: true
+    })
+  },
+
+  saveDefiMarketsCache(cacheData) {
+    return DefiMarketsCache.bulkCreate(cacheData, {
+      ignoreDuplicates: true
+    })
+  },
+
+  async getDefiMarketsCache(timePeriod, chain) {
+    const sql = `SELECT *
+                  FROM tb_defi_markets_cache
+                  WHERE time_period = :timePeriod AND
+                        chain=:chain`
+
+    const defiMarketsCacheDataCount = await models.sequelize.query(sql, {
+      replacements: { timePeriod, chain },
+      type: Sequelize.QueryTypes.SELECT
+    });
+
+    return defiMarketsCacheDataCount
+  },
+
+  async getDefiMarketsCacheDataCount(timePeriod, chain) {
+    const sql = `SELECT count(*)
+                  FROM tb_defi_markets_cache
+                  WHERE time_period = :timePeriod AND
+                        chain=:chain`
+
+    const defiMarketsCacheDataCount = await models.sequelize.query(sql, {
+      replacements: { timePeriod, chain },
+      type: Sequelize.QueryTypes.SELECT
+    });
+
+    return defiMarketsCacheDataCount
   },
 
   getXRate(timestamp, sourceCurrencyCode, targetCurrencyCode) {

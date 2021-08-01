@@ -8,6 +8,7 @@ import ResourceInfo from './ResourceInfo'
 import FiatXRate from './XRate'
 import TokenInfo from './TokenInfo'
 import TokenHolder from './TokenHolder'
+import DefiMarketsCache from './DefiMarketsCache'
 
 const config = configJson[process.env.NODE_ENV || 'development']
 const sequelize = new Sequelize(
@@ -25,7 +26,8 @@ const models = {
   CoinInfo: CoinInfo.init(sequelize, Sequelize),
   FiatXRate: FiatXRate.init(sequelize, Sequelize),
   TokenInfo: TokenInfo.init(sequelize, Sequelize),
-  TokenHolder: TokenHolder.init(sequelize, Sequelize)
+  TokenHolder: TokenHolder.init(sequelize, Sequelize),
+  DefiMarketsCache: DefiMarketsCache.init(sequelize, Sequelize)
 }
 
 // This creates relationships in the ORM

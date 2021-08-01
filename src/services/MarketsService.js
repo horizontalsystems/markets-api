@@ -261,12 +261,17 @@ class MarketsService {
             const periods = diffPeriods.split(',')
             if (periods.length > 0) {
               await Promise.all(
-                periods.map(period => {
+                periods.map(async period => {
+                  const cacheCountResult = await Storage.getDefiMarketsCacheDataCount(period, chainFilter)
+                  const cacheCount = parseInt(cacheCountResult[0].count, 10)
                   const timePeriod = TimePeriod.identify(period)
                   const fromTimestamp = (Math.floor(Date.now() / 1000)) - timePeriod.seconds
+                  const cacheDatas = []
                   let storageMethod
 
-                  if (chainFilter === 'all') {
+                  if (cacheCount > 0) {
+                    storageMethod = Storage.getDefiMarketsCache(period, chainFilter)
+                  } else if (chainFilter === 'all') {
                     storageMethod = Storage.getDefiMarketsDiff(fromTimestamp, coinIds)
                   } else {
                     storageMethod = Storage.getChainDefiMarketsDiff(fromTimestamp, chainFilter, coinIds)
@@ -275,14 +280,31 @@ class MarketsService {
                   return storageMethod.then(diffResults => {
                     defiMarkets.forEach(dfm => {
                       const found = diffResults.find(dr => dr.coin_id === dfm.id.toString())
+                      const cacheData = {
+                        timePeriod: period,
+                        coinId: dfm.id,
+                        chain: chainFilter,
+                        timestamp: Math.floor(Date.now() / 1000),
+                        totalValueLocked: parseInt(0, 10),
+                        totalValueLockedDiff: parseInt(0, 10)
+                      }
+
                       if (found) {
                         dfm[`tvl_diff_${timePeriod.name}`] = found.tvl_diff
                         dfm.tvl = found.tvl * xrate.usdXRate
+                        cacheData.totalValueLocked = found.tvl
+                        cacheData.totalValueLockedDiff = found.tvl_diff
                       } else {
                         dfm[`tvl_diff_${timePeriod.name}`] = parseInt(0, 10)
                         dfm.tvl = 0
                       }
+
+                      cacheDatas.push(cacheData)
                     })
+
+                    if (cacheCount === 0) {
+                      Storage.saveDefiMarketsCache(cacheDatas)
+                    }
                   })
                 })
               )

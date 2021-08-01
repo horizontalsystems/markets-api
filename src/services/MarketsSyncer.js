@@ -21,6 +21,8 @@ class MarketsSyncer {
 
   async syncMarkets() {
     const now = Math.floor(Date.now() / 1000)
+    this.deleteDefiMarketsCache(now)
+    await new Promise(r => setTimeout(r, 2000));
     this.syncGlobalMarkets(now)
     await new Promise(r => setTimeout(r, 1000));
     this.syncDefiMarkets(now)
@@ -48,6 +50,12 @@ class MarketsSyncer {
         e => logger.error(`Error saving xrates: ${e}`)
       );
     }).catch(e => logger.error(`Error syncing xrates: ${e}`));
+  }
+
+  async deleteDefiMarketsCache() {
+    Storage.deleteDefiMarketsCache().catch(
+      e => logger.error(`Error deleting cache : ${e}`)
+    );
   }
 }
 
